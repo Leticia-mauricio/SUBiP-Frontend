@@ -1,0 +1,17 @@
+<h2>Alterar livro</h2>
+
+<label for="titulo">
+  Titulo
+</label>
+
+<input
+  id="titulo"
+  type="text"
+  [(ngModel)]="livro.titulo"
+/>
+
+<br><br>
+
+<button (click)="salvar()">
+  Atualizar
+</button>

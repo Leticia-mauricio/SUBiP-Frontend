@@ -1,0 +1,175 @@
+<div class="acervo-page">
+
+    <section class="hero">
+
+        <h1>Consulta de Acervo</h1>
+
+        <p>
+            Pesquise livros disponíveis nas bibliotecas participantes do SUBiP.
+        </p>
+
+    </section>
+
+    <section class="filtros-card">
+
+        <div class="campo">
+
+            <label for="titulo">
+                Título
+            </label>
+
+            <input
+                id="titulo"
+                type="text"
+                [(ngModel)]="titulo"
+                placeholder="Digite o título do livro"
+            >
+
+        </div>
+
+        <div class="linha-filtros">
+
+            <div class="campo">
+
+                <label for="genero">
+                    Gênero
+                </label>
+
+                <select
+                    id="genero"
+                    [(ngModel)]="generoId"
+                >
+
+                    <option [ngValue]="null">
+                        Todos os gêneros
+                    </option>
+
+                    <option
+                        *ngFor="let genero of generos"
+                        [ngValue]="genero.id"
+                    >
+                        {{ genero.descricao }}
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="campo">
+
+                <label for="biblioteca">
+                    Biblioteca
+                </label>
+
+                <select
+                    id="biblioteca"
+                    [(ngModel)]="bibliotecaId"
+                >
+
+                    <option [ngValue]="null">
+                        Todas as bibliotecas
+                    </option>
+
+                    <option
+                        *ngFor="let biblioteca of bibliotecas"
+                        [ngValue]="biblioteca.id"
+                    >
+                        {{ biblioteca.nome }}
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <label class="checkbox">
+
+            <input
+                type="checkbox"
+                [(ngModel)]="somenteDisponiveis"
+            >
+
+            Somente disponíveis
+
+        </label>
+
+        <button
+            class="btn-pesquisar"
+            (click)="pesquisar()"
+        >
+            Pesquisar
+        </button>
+
+    </section>
+
+    <section class="resultados">
+
+        <h2 *ngIf="pesquisou">
+            Resultados
+        </h2>
+
+        <div
+            class="mensagem"
+            *ngIf="!pesquisou"
+        >
+            Utilize os filtros acima para pesquisar no acervo.
+        </div>
+
+        <div
+            class="mensagem"
+            *ngIf="pesquisou && resultados.length === 0"
+        >
+            Nenhum livro encontrado.
+        </div>
+
+        <div
+            class="resultado-card"
+            *ngFor="let item of resultados"
+        >
+
+            <div class="card-topo">
+
+                <h3>
+                    {{ item.titulo }}
+                </h3>
+
+                <span class="badge-genero">
+                    {{ item.generoDescricao }}
+                </span>
+
+            </div>
+
+            <p class="biblioteca">
+
+                <strong>Biblioteca:</strong>
+
+                {{ item.bibliotecaNome }}
+
+            </p>
+
+            <div class="status">
+
+                <span
+                    class="disponivel"
+                    *ngIf="item.quantidadeDisponivel > 0"
+                >
+                    {{ item.quantidadeDisponivel }}
+                    disponível(is)
+                </span>
+
+                <span
+                    class="emprestado"
+                    *ngIf="item.quantidadeEmprestada > 0"
+                >
+                    {{ item.quantidadeEmprestada }}
+                    emprestado(s)
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

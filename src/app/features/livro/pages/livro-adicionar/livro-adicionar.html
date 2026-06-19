@@ -1,0 +1,13 @@
+<h2>Adicionar livro</h2>
+
+<input
+  type="text"
+  placeholder="Titulo do livro"
+  [(ngModel)]="livro.titulo"
+/>
+
+<button (click)="salvar()">
+  Salvar
+</button>
+
+<p>Nome digitado: {{ livro.titulo }}</p>

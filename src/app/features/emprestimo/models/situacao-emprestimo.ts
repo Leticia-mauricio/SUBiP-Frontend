@@ -1,0 +1,6 @@
+export enum SituacaoEmprestimo {
+	EM_ANDAMENTO = 'EM_ANDAMENTO',
+	RENOVADO = 'RENOVADO',
+	DEVOLVIDO = 'DEVOLVIDO',
+	ATRASADO = 'ATRASADO'
+}

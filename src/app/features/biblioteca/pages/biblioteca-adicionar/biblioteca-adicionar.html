@@ -1,0 +1,13 @@
+<h2>Adicionar Biblioteca</h2>
+
+<input
+  type="text"
+  placeholder="Nome da biblioteca"
+  [(ngModel)]="biblioteca.nome"
+/>
+
+<button (click)="salvar()">
+  Salvar
+</button>
+
+<p>Nome digitado: {{ biblioteca.nome }}</p>

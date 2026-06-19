@@ -1,0 +1,43 @@
+<div class="emprestimo-container">
+
+  <div class="page-header">
+    <h1>Registrar Devolução</h1>
+
+    <p>
+      Confirme a devolução do exemplar.
+    </p>
+  </div>
+
+  <div class="card">
+
+    <div class="form-group">
+      <label>ID do Empréstimo</label>
+
+      <input
+        type="number"
+        [(ngModel)]="emprestimoId">
+    </div>
+
+    <div class="form-group">
+      <label>Data de Devolução</label>
+
+      <input
+        type="date"
+        [(ngModel)]="devolucao.dataDevolucao">
+    </div>
+
+    <div class="actions">
+
+      <button
+        class="btn-confirmar"
+        (click)="devolver()">
+
+        Confirmar Devolução
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

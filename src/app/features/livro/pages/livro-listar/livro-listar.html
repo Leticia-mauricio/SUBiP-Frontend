@@ -1,0 +1,55 @@
+<h2>livros</h2>
+
+<a routerLink="/gerenciar/livros/adicionar">
+  Novo Livro
+</a>
+
+<br><br>
+
+<table border="1">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let livro of livros">
+
+      <td>{{ livro.id }}</td>
+
+      <td>{{ livro.titulo }}</td>
+
+      <td>
+
+        <a
+          [routerLink]="[
+            '/gerenciar/livros/alterar',
+            livro.id
+          ]"
+        >
+          Editar
+        </a>
+
+        |
+
+        <a
+          [routerLink]="[
+            '/gerenciar/livros/excluir',
+            livro.id
+          ]"
+        >
+          Excluir
+        </a>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>

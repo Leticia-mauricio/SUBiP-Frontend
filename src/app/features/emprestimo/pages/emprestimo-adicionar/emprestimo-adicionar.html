@@ -1,0 +1,88 @@
+<div class="emprestimo-container">
+
+  <div class="page-header">
+    <span class="breadcrumb">
+      Empréstimos > Novo Empréstimo
+    </span>
+
+    <h1>Registrar Novo Empréstimo</h1>
+
+    <p>
+      Preencha as informações abaixo para registrar a saída do exemplar.
+    </p>
+  </div>
+
+  <form class="emprestimo-form">
+
+    <div class="card">
+      <h3>📚 Identificação do Livro</h3>
+
+      <div class="form-group">
+        <label>Exemplar</label>
+
+        <select>
+          <option>Selecione um exemplar</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>👤 Identificação do Leitor</h3>
+
+      <div class="form-group">
+        <label>Leitor</label>
+
+        <select>
+          <option>Selecione um leitor</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📅 Prazo do Empréstimo</h3>
+
+      <div class="info-box">
+
+        <div class="info-item">
+          <span class="label">Data de Retirada</span>
+          <span class="value">{{ hoje }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Data Prevista de Devolução</span>
+          <span class="value destaque">
+            {{ dataDevolucaoPrevista }}
+          </span>
+        </div>
+
+      </div>
+
+      <p class="observacao">
+        O prazo é calculado automaticamente conforme as regras da biblioteca.
+      </p>
+
+    </div>
+
+    <div class="actions">
+
+      <button
+        type="button"
+        class="btn-cancelar">
+
+        Cancelar
+
+      </button>
+
+      <button
+        type="submit"
+        class="btn-confirmar">
+
+        Confirmar Empréstimo
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

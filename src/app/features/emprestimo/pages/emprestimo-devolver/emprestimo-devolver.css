@@ -1,0 +1,56 @@
+.emprestimo-container {
+  padding: 24px;
+  max-width: 900px;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin-bottom: 8px;
+  font-size: 30px;
+}
+
+.page-header p {
+  color: #666;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-group input {
+  height: 42px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-confirmar {
+  border: none;
+  background: #1d4ed8;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+}

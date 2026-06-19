@@ -1,0 +1,5 @@
+export enum SituacaoExemplar {
+    DISPONIVEL = 'DISPONIVEL',
+	EMPRESTADO = 'EMPRESTADO',
+	INDISPONIVEL = 'INDISPONIVEL'
+}

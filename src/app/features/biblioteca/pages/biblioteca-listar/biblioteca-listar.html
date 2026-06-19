@@ -1,0 +1,55 @@
+<h2>Bibliotecas</h2>
+
+<a routerLink="/gerenciar/bibliotecas/adicionar">
+  Nova Biblioteca
+</a>
+
+<br><br>
+
+<table border="1">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let biblioteca of bibliotecas">
+
+      <td>{{ biblioteca.id }}</td>
+
+      <td>{{ biblioteca.nome }}</td>
+
+      <td>
+
+        <a
+          [routerLink]="[
+            '/gerenciar/bibliotecas/alterar',
+            biblioteca.id
+          ]"
+        >
+          Editar
+        </a>
+
+        |
+
+        <a
+          [routerLink]="[
+            '/gerenciar/bibliotecas/excluir',
+            biblioteca.id
+          ]"
+        >
+          Excluir
+        </a>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>

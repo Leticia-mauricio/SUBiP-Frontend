@@ -1,0 +1,13 @@
+<h2>Adicionar Exemplar</h2>
+
+<input
+  type="text"
+  placeholder="Tombo do exemplar"
+  [(ngModel)]="exemplar.tombo"
+/>
+
+<button (click)="salvar()">
+  Salvar
+</button>
+
+<p>Nome digitado: {{ exemplar.tombo }}</p>

@@ -1,0 +1,13 @@
+<h2>Adicionar Gênero Literário</h2>
+
+<input
+  type="text"
+  placeholder="Gênero"
+  [(ngModel)]="genero.descricao"
+/>
+
+<button (click)="salvar()">
+  Salvar
+</button>
+
+<p>Nome digitado: {{ genero.descricao }}</p>
