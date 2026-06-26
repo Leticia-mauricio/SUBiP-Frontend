@@ -6,6 +6,7 @@ import { Emprestimo } from '../models/emprestimo';
 import { EmprestimoRenovacao } from '../models/emprestimo-renovacao';
 import { EmprestimoDevolucao } from '../models/emprestimo-devolucao';
 import { EmprestimoCadastro } from '../models/emprestimo-cadastro';
+import { MeuEmprestimo } from '../models/meu-emprestimo';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +24,6 @@ export class EmprestimoService {
   buscarPorId(id: number): Observable<Emprestimo> {
     return this.http.get<Emprestimo>(`${this.apiUrl}/${id}`);
   }
-
-  /*salvar(emprestimo: Emprestimo): Observable<Emprestimo> {
-    return this.http.post<Emprestimo>(
-      this.apiUrl,
-      emprestimo
-    );
-  }*/
 
   salvar(emprestimo: EmprestimoCadastro): Observable<Emprestimo> {
 
@@ -66,4 +60,14 @@ export class EmprestimoService {
       `${this.apiUrl}/${id}`
     );
   }
+
+  listarPorLeitor(
+  pessoaId: number
+): Observable<MeuEmprestimo[]> {
+
+  return this.http.get<MeuEmprestimo[]>(
+    `${this.apiUrl}/leitor/${pessoaId}`
+  );
+
+}
 }
