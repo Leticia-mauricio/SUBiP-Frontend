@@ -60,7 +60,7 @@ export class Dashboard {
 
     {
       descricao: 'Meus Empréstimos',
-      rota: '/gerenciar/emprestimos',
+      rota: '/gerenciar/emprestimos/meus-emprestimos',
       icone: '📖',
       perfis: ['LEITOR']
     },
