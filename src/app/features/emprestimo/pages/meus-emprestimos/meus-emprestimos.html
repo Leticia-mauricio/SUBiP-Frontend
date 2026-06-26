@@ -14,161 +14,151 @@
 
     </div>
 
-    @if(carregando){
+    <section class="ativos">
 
-        <p>Carregando empréstimos...</p>
+        <h2>📚 Empréstimos Ativos</h2>
 
-    } @else {
+        @if(possuiEmprestimosAtivos()){
 
-        <section class="ativos">
+        <div class="cards">
 
-            <h2>📚 Empréstimos Ativos</h2>
+            @for(emprestimo of emprestimosAtivos; track emprestimo.id){
 
-            @if(possuiEmprestimosAtivos()){
+            <div class="card">
 
-                <div class="cards">
+                <div class="card-header">
 
-                    @for(emprestimo of emprestimosAtivos; track emprestimo.id){
+                    <h3>{{ emprestimo.tituloLivro }}</h3>
 
-                        <div class="card">
+                    <span class="status">
+                        {{ emprestimo.situacao }}
+                    </span>
 
-                            <div class="card-header">
+                </div>
 
-                                <h3>{{ emprestimo.tituloLivro }}</h3>
+                <div class="card-body">
 
-                                <span class="status">
-                                    {{ emprestimo.situacao }}
-                                </span>
+                    <p>
+                        <strong>Biblioteca:</strong>
+                        {{ emprestimo.biblioteca }}
+                    </p>
 
-                            </div>
+                    <p>
+                        <strong>Tombo:</strong>
+                        {{ emprestimo.tombo }}
+                    </p>
 
-                            <div class="card-body">
+                    <p>
+                        <strong>Retirada:</strong>
+                        {{ emprestimo.dataRetirada }}
+                    </p>
 
-                                <p>
-                                    <strong>Biblioteca:</strong>
-                                    {{ emprestimo.biblioteca }}
-                                </p>
+                    <p>
+                        <strong>Devolver até:</strong>
+                        {{ emprestimo.dataDevolucaoPrevista }}
+                    </p>
 
-                                <p>
-                                    <strong>Tombo:</strong>
-                                    {{ emprestimo.tombo }}
-                                </p>
+                </div>
 
-                                <p>
-                                    <strong>Retirada:</strong>
-                                    {{ emprestimo.dataRetirada }}
-                                </p>
+                <div class="card-footer">
 
-                                <p>
-                                    <strong>Devolver até:</strong>
-                                    {{ emprestimo.dataDevolucaoPrevista }}
-                                </p>
-
-                            </div>
-
-                            <div class="card-footer">
-
-                                <button
-                                    class="btn-primary"
-                                    [routerLink]="[
+                    <button class="btn-primary" [routerLink]="[
                                         '/gerenciar/emprestimos/renovar',
                                         emprestimo.id
                                     ]">
 
-                                    Renovar
+                        Renovar
 
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    }
+                    </button>
 
                 </div>
 
-            } @else {
-
-                <div class="empty">
-
-                    Você não possui empréstimos ativos.
-
-                </div>
+            </div>
 
             }
 
-        </section>
+        </div>
 
-        <section class="historico">
+        } @else {
 
-            <h2>📖 Histórico de Empréstimos</h2>
+        <div class="empty">
 
-            @if(possuiHistorico()){
+            Você não possui empréstimos ativos.
 
-                <table>
+        </div>
 
-                    <thead>
+        }
 
-                        <tr>
+    </section>
 
-                            <th>Livro</th>
+    <section class="historico">
 
-                            <th>Biblioteca</th>
+        <h2>📖 Histórico de Empréstimos</h2>
 
-                            <th>Retirada</th>
+        @if(possuiHistorico()){
 
-                            <th>Devolução</th>
+        <table>
 
-                            <th>Situação</th>
+            <thead>
 
-                        </tr>
+                <tr>
 
-                    </thead>
+                    <th>Livro</th>
 
-                    <tbody>
+                    <th>Biblioteca</th>
 
-                        @for(emprestimo of historicoEmprestimos; track emprestimo.id){
+                    <th>Retirada</th>
 
-                            <tr>
+                    <th>Devolução</th>
 
-                                <td>{{ emprestimo.tituloLivro }}</td>
+                    <th>Situação</th>
 
-                                <td>{{ emprestimo.biblioteca }}</td>
+                </tr>
 
-                                <td>{{ emprestimo.dataRetirada }}</td>
+            </thead>
 
-                                <td>{{ emprestimo.dataDevolucao }}</td>
+            <tbody>
 
-                                <td>
+                @for(emprestimo of historicoEmprestimos; track emprestimo.id){
 
-                                    <span class="status historico-status">
+                <tr>
 
-                                        {{ emprestimo.situacao }}
+                    <td>{{ emprestimo.tituloLivro }}</td>
 
-                                    </span>
+                    <td>{{ emprestimo.biblioteca }}</td>
 
-                                </td>
+                    <td>{{ emprestimo.dataRetirada }}</td>
 
-                            </tr>
+                    <td>{{ emprestimo.dataDevolucao }}</td>
 
-                        }
+                    <td>
 
-                    </tbody>
+                        <span class="status historico-status">
 
-                </table>
+                            {{ emprestimo.situacao }}
 
-            } @else {
+                        </span>
 
-                <div class="empty">
+                    </td>
 
-                    Nenhum empréstimo encontrado.
+                </tr>
 
-                </div>
+                }
 
-            }
+            </tbody>
 
-        </section>
+        </table>
 
-    }
+        } @else {
+
+        <div class="empty">
+
+            Nenhum empréstimo encontrado.
+
+        </div>
+
+        }
+
+    </section>
 
 </div>
