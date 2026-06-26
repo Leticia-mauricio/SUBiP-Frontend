@@ -59,6 +59,13 @@ export class Dashboard {
     },
 
     {
+      descricao: 'Meus Empréstimos',
+      rota: '/gerenciar/emprestimos',
+      icone: '📖',
+      perfis: ['LEITOR']
+    },
+
+    {
       descricao: 'Gerenciar Livros',
       rota: '/gerenciar/livros',
       icone: '📘',
