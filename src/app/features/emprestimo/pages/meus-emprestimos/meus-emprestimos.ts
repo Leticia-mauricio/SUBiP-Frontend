@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { MeuEmprestimo } from '../../models/meu-emprestimo';
 import { SituacaoEmprestimo } from '../../models/situacao-emprestimo';
 import { EmprestimoService } from '../../services/emprestimo.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-meus-emprestimos',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './meus-emprestimos.html',
   styleUrl: './meus-emprestimos.css'
 })
