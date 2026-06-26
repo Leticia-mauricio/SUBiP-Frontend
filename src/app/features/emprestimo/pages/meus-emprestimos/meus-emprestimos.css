@@ -1,0 +1,256 @@
+.container {
+
+    max-width: 1200px;
+    margin: auto;
+    padding: 32px;
+
+}
+
+.page-header {
+
+    margin-bottom: 40px;
+
+}
+
+.breadcrumb {
+
+    color: #777;
+    font-size: .9rem;
+
+}
+
+.page-header h1 {
+
+    color: #1b2b52;
+    margin: 10px 0;
+
+}
+
+.page-header p {
+
+    color: #666;
+
+}
+
+.ativos,
+.historico {
+
+    margin-top: 40px;
+
+}
+
+.ativos h2,
+.historico h2 {
+
+    color: #1b2b52;
+    margin-bottom: 20px;
+
+}
+
+.cards {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+
+    gap: 24px;
+
+}
+
+.card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+
+    padding: 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    transition: .2s;
+
+}
+
+.card:hover {
+
+    transform: translateY(-3px);
+
+}
+
+.card-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 16px;
+
+}
+
+.card-header h3 {
+
+    color: #1b2b52;
+
+    margin: 0;
+
+}
+
+.status {
+
+    background: #dff4e5;
+
+    color: #2e7d32;
+
+    border-radius: 20px;
+
+    padding: 6px 12px;
+
+    font-size: .8rem;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+}
+
+.card-body {
+
+    margin: 24px 0;
+
+}
+
+.card-body p {
+
+    margin: 8px 0;
+
+    color: #444;
+
+}
+
+.card-body strong {
+
+    color: #1b2b52;
+
+}
+
+.card-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+}
+
+.btn-primary {
+
+    background: #1155cc;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 12px 22px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.btn-primary:hover {
+
+    background: #0d47a1;
+
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+
+}
+
+thead {
+
+    background: #1155cc;
+
+    color: white;
+
+}
+
+th,
+td {
+
+    padding: 16px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #eee;
+
+}
+
+tbody tr:hover {
+
+    background: #f8faff;
+
+}
+
+.historico-status {
+
+    background: #eceff1;
+
+    color: #455a64;
+
+}
+
+.empty {
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: #666;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+
+}
+
+@media (max-width: 768px) {
+
+    .cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    table {
+
+        display: block;
+        overflow-x: auto;
+
+    }
+
+}

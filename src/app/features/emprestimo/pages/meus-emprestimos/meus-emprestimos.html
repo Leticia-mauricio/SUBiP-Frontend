@@ -1,1 +1,174 @@
-<p>meus-emprestimos works!</p>
+<div class="container">
+
+    <div class="page-header">
+
+        <span class="breadcrumb">
+            Início > Meus Empréstimos
+        </span>
+
+        <h1>Meus Empréstimos</h1>
+
+        <p>
+            Consulte seus empréstimos ativos, renove quando permitido e visualize seu histórico de empréstimos.
+        </p>
+
+    </div>
+
+    @if(carregando){
+
+        <p>Carregando empréstimos...</p>
+
+    } @else {
+
+        <section class="ativos">
+
+            <h2>📚 Empréstimos Ativos</h2>
+
+            @if(possuiEmprestimosAtivos()){
+
+                <div class="cards">
+
+                    @for(emprestimo of emprestimosAtivos; track emprestimo.id){
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>{{ emprestimo.tituloLivro }}</h3>
+
+                                <span class="status">
+                                    {{ emprestimo.situacao }}
+                                </span>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <p>
+                                    <strong>Biblioteca:</strong>
+                                    {{ emprestimo.nomeBiblioteca }}
+                                </p>
+
+                                <p>
+                                    <strong>Tombo:</strong>
+                                    {{ emprestimo.tombo }}
+                                </p>
+
+                                <p>
+                                    <strong>Retirada:</strong>
+                                    {{ emprestimo.dataRetirada }}
+                                </p>
+
+                                <p>
+                                    <strong>Devolver até:</strong>
+                                    {{ emprestimo.dataDevolucaoPrevista }}
+                                </p>
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <button
+                                    class="btn-primary"
+                                    [routerLink]="[
+                                        '/gerenciar/emprestimos/renovar',
+                                        emprestimo.id
+                                    ]">
+
+                                    Renovar
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    }
+
+                </div>
+
+            } @else {
+
+                <div class="empty">
+
+                    Você não possui empréstimos ativos.
+
+                </div>
+
+            }
+
+        </section>
+
+        <section class="historico">
+
+            <h2>📖 Histórico de Empréstimos</h2>
+
+            @if(possuiHistorico()){
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Livro</th>
+
+                            <th>Biblioteca</th>
+
+                            <th>Retirada</th>
+
+                            <th>Devolução</th>
+
+                            <th>Situação</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @for(emprestimo of historicoEmprestimos; track emprestimo.id){
+
+                            <tr>
+
+                                <td>{{ emprestimo.tituloLivro }}</td>
+
+                                <td>{{ emprestimo.nomeBiblioteca }}</td>
+
+                                <td>{{ emprestimo.dataRetirada }}</td>
+
+                                <td>{{ emprestimo.dataDevolucao }}</td>
+
+                                <td>
+
+                                    <span class="status historico-status">
+
+                                        {{ emprestimo.situacao }}
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            } @else {
+
+                <div class="empty">
+
+                    Nenhum empréstimo encontrado.
+
+                </div>
+
+            }
+
+        </section>
+
+    }
+
+</div>
