@@ -12,7 +12,7 @@
     </p>
   </div>
 
-  <form class="emprestimo-form">
+  <form class="emprestimo-form" (ngSubmit)="salvar()">
 
     <div class="card">
       <h3>📚 Identificação do Livro</h3>
@@ -20,11 +20,20 @@
       <div class="form-group">
         <label for="livro">Livro</label>
 
-        <select id="livro" name="livro">
+        <select
+          id="livro"
+          name="livro"
+          [(ngModel)]="emprestimo.livroId">
 
-          <option value="">
+          <option [ngValue]="null">
             Selecione um livro
           </option>
+
+          @for (livro of livros; track livro.id) {
+            <option [value]="livro.id">
+              {{ livro.titulo }}
+            </option>
+          }
 
         </select>
       </div>
@@ -36,11 +45,20 @@
       <div class="form-group">
         <label for="leitor">Leitor</label>
 
-        <select id="leitor" name="leitor">
+        <select
+          id="leitor"
+          name="leitor"
+          [(ngModel)]="emprestimo.pessoaId">
 
-          <option value="">
+          <option [ngValue]="null">
             Selecione um leitor
           </option>
+
+          @for (leitor of leitores; track leitor.id) {
+            <option [value]="leitor.id">
+              {{ leitor.nome }}
+            </option>
+          }
 
         </select>
       </div>
@@ -73,11 +91,16 @@
 
     <div class="actions">
 
-      <button type="button" class="btn-cancelar" routerLink="/gerenciar">
+      <button
+        type="button"
+        class="btn-cancelar"
+        routerLink="/gerenciar">
         Cancelar
       </button>
 
-      <button type="submit" class="btn-confirmar" (click)="salvar()">
+      <button
+        type="submit"
+        class="btn-confirmar">
         Confirmar Empréstimo
       </button>
 
