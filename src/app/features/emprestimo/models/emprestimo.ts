@@ -14,3 +14,4 @@ export interface Emprestimo {
 
     diasAtraso?: number;
 }
+

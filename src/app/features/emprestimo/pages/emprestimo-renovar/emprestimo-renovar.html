@@ -1,43 +1,107 @@
 <div class="emprestimo-container">
 
   <div class="page-header">
-    <h1>Renovação de Empréstimo</h1>
+
+    <span class="breadcrumb">
+      Empréstimos > Renovar Empréstimo
+    </span>
+
+    <h1>Renovar Empréstimo</h1>
 
     <p>
-      Renove o prazo de devolução do exemplar.
+      Informe o tombo do exemplar para localizar o empréstimo em andamento.
     </p>
+
   </div>
 
-  <div class="card">
+  <form class="emprestimo-form">
 
-    <div class="form-group">
-      <label>ID do Empréstimo</label>
+    <div class="card">
 
-      <input
-        type="number"
-        [(ngModel)]="emprestimoId">
-    </div>
+      <h3>📚 Identificação do Exemplar</h3>
 
-    <div class="form-group">
-      <label>Novo Prazo</label>
+      <div class="form-group">
 
-      <input
-        type="date"
-        [(ngModel)]="renovacao.dataDevolucaoPrevista">
-    </div>
+        <label>Tombo do Exemplar</label>
 
-    <div class="actions">
+        <input
+          type="text"
+          placeholder="Ex.: TOMBO-000123"
+        >
+
+      </div>
 
       <button
-        class="btn-confirmar"
-        (click)="renovar()">
+        type="button"
+        class="btn-buscar">
 
-        Renovar
+        Buscar Empréstimo
 
       </button>
 
     </div>
 
-  </div>
+    <div class="card">
+
+      <h3>ℹ️ Informações do Empréstimo</h3>
+
+      <div class="info-box">
+
+        <div class="info-item">
+          <span class="label">Livro</span>
+          <span class="value">—</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Leitor</span>
+          <span class="value">—</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Data de Retirada</span>
+          <span class="value">—</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Data Prevista de Devolução Atual</span>
+          <span class="value">—</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Nova Data Prevista</span>
+          <span class="value destaque">
+            Será calculada automaticamente
+          </span>
+        </div>
+
+      </div>
+
+      <p class="observacao">
+        A nova data de devolução será calculada automaticamente pelo sistema após a renovação.
+      </p>
+
+    </div>
+
+    <div class="actions">
+
+      <button
+        type="button"
+        class="btn-cancelar">
+
+        Cancelar
+
+      </button>
+
+      <button
+        type="submit"
+        class="btn-confirmar">
+
+        Confirmar Renovação
+
+      </button>
+
+    </div>
+
+  </form>
 
 </div>

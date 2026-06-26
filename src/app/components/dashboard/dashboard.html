@@ -1,0 +1,21 @@
+<div class="dashboard">
+
+  <h2>Painel de Funcionalidades</h2>
+
+  <nav>
+
+    @for(menu of menusPermitidos(); track menu.rota) {
+
+      <a
+        [routerLink]="menu.rota"
+        class="dashboard-item">
+
+        {{ menu.descricao }}
+
+      </a>
+
+    }
+
+  </nav>
+
+</div>

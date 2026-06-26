@@ -1,21 +1,44 @@
 <header class="header">
+
   <div class="logo-area">
     <img
       src="assets/logo-minas-gerais.png"
       alt="Minas Gerais"
-      class="logo"
-    >
+      class="logo">
 
     <h1>SUBIP</h1>
   </div>
 
   <div class="menu-actions">
-    <button class="btn-login">
-      Entrar
-    </button>
 
-    <a routerLink="/ajuda">
+    @if (autenticacao) {
+
+      <span class="usuario">
+        Olá, {{ primeiroNome() }}
+      </span>
+
+      <button
+        class="btn-login"
+        (click)="sair()">
+        Sair
+      </button>
+
+    } @else {
+
+      <button
+        class="btn-login"
+        routerLink="/login">
+        Entrar
+      </button>
+
+    }
+
+    <a
+      routerLink="/ajuda"
+      class="menu-link">
       Ajuda
     </a>
+
   </div>
+
 </header>

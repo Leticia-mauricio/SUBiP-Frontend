@@ -8,7 +8,7 @@
     <h1>Registrar Novo Empréstimo</h1>
 
     <p>
-      Preencha as informações abaixo para registrar a saída do exemplar.
+      Preencha as informações abaixo para registrar o empréstimo.
     </p>
   </div>
 
@@ -18,10 +18,14 @@
       <h3>📚 Identificação do Livro</h3>
 
       <div class="form-group">
-        <label>Exemplar</label>
+        <label for="livro">Livro</label>
 
-        <select>
-          <option>Selecione um exemplar</option>
+        <select id="livro" name="livro">
+
+          <option value="">
+            Selecione um livro
+          </option>
+
         </select>
       </div>
     </div>
@@ -30,16 +34,20 @@
       <h3>👤 Identificação do Leitor</h3>
 
       <div class="form-group">
-        <label>Leitor</label>
+        <label for="leitor">Leitor</label>
 
-        <select>
-          <option>Selecione um leitor</option>
+        <select id="leitor" name="leitor">
+
+          <option value="">
+            Selecione um leitor
+          </option>
+
         </select>
       </div>
     </div>
 
     <div class="card">
-      <h3>📅 Prazo do Empréstimo</h3>
+      <h3>ℹ️ Informações do Empréstimo</h3>
 
       <div class="info-box">
 
@@ -58,24 +66,20 @@
       </div>
 
       <p class="observacao">
-        O prazo é calculado automaticamente conforme as regras da biblioteca.
+        Prazo padrão de 15 dias corridos.
       </p>
 
     </div>
 
     <div class="actions">
 
-      <button
-        type="button"
-        class="btn-cancelar">
+      <button type="button" class="btn-cancelar">
 
         Cancelar
 
       </button>
 
-      <button
-        type="submit"
-        class="btn-confirmar">
+      <button type="submit" class="btn-confirmar">
 
         Confirmar Empréstimo
 

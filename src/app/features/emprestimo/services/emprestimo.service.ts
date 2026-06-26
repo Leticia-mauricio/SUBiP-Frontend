@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Emprestimo } from '../models/emprestimo';
 import { EmprestimoRenovacao } from '../models/emprestimo-renovacao';
 import { EmprestimoDevolucao } from '../models/emprestimo-devolucao';
+import { EmprestimoCadastro } from '../models/emprestimo-cadastro';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class EmprestimoService {
 
   private readonly apiUrl = 'http://localhost:8080/emprestimos';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   listar(): Observable<Emprestimo[]> {
     return this.http.get<Emprestimo[]>(this.apiUrl);
@@ -23,7 +24,15 @@ export class EmprestimoService {
     return this.http.get<Emprestimo>(`${this.apiUrl}/${id}`);
   }
 
-  salvar(emprestimo: Emprestimo): Observable<Emprestimo> {
+  /*salvar(emprestimo: Emprestimo): Observable<Emprestimo> {
+    return this.http.post<Emprestimo>(
+      this.apiUrl,
+      emprestimo
+    );
+  }*/
+
+  salvar(emprestimo: EmprestimoCadastro): Observable<Emprestimo> {
+
     return this.http.post<Emprestimo>(
       this.apiUrl,
       emprestimo

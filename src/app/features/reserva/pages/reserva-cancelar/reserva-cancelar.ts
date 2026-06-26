@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-reserva-excluir',
+  selector: 'app-reserva-cancelar',
   imports: [],
-  templateUrl: './reserva-excluir.html',
-  styleUrl: './reserva-excluir.css',
+  templateUrl: './reserva-cancelar.html',
+  styleUrl: './reserva-cancelar.css',
 })
-export class ReservaExcluir {}
+export class ReservaCancelar {}

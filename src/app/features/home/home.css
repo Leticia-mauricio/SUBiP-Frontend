@@ -1,5 +1,11 @@
+.home-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
 .home {
-    width: 100%;
+    flex: 1;
 }
 
 /* HERO */

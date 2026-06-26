@@ -19,7 +19,7 @@ import { ExemplarExcluir } from './features/exemplar/pages/exemplar-excluir/exem
 import { ExemplarAlterar } from './features/exemplar/pages/exemplar-alterar/exemplar-alterar';
 import { ReservaListar } from './features/reserva/pages/reserva-listar/reserva-listar';
 import { ReservaAdicionar } from './features/reserva/pages/reserva-adicionar/reserva-adicionar';
-import { ReservaExcluir } from './features/reserva/pages/reserva-cancelar/reserva-cancelar';
+import { ReservaCancelar} from './features/reserva/pages/reserva-cancelar/reserva-cancelar';
 import { EmprestimoListar } from './features/emprestimo/pages/emprestimo-listar/emprestimo-listar';
 import { EmprestimoAdicionar } from './features/emprestimo/pages/emprestimo-adicionar/emprestimo-adicionar';
 import { EmprestimoDevolver } from './features/emprestimo/pages/emprestimo-devolver/emprestimo-devolver';
@@ -93,8 +93,8 @@ export const routes: Routes = [
                         children: [
                             { path: '', component: EmprestimoListar },
                             { path: 'adicionar', component: EmprestimoAdicionar },
-                            { path: 'devolver/:id', component: EmprestimoDevolver },
-                            { path: 'renovar/:id', component: EmprestimoRenovar }
+                            { path: 'devolver', component: EmprestimoDevolver },
+                            { path: 'renovar', component: EmprestimoRenovar }
                         ]
                     },
                     {
@@ -102,7 +102,7 @@ export const routes: Routes = [
                         children: [
                             { path: '', component: ReservaListar },
                             { path: 'adicionar', component: ReservaAdicionar },
-                            { path: 'excluir/:id', component: ReservaExcluir }
+                            { path: 'excluir/:id', component: ReservaCancelar }
                         ]
                     }
                 ]
