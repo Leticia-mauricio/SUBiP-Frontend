@@ -3,3 +3,4 @@ export interface EmprestimoCadastro {
     exemplarId: number;
     pessoaId: number;
 }
+
