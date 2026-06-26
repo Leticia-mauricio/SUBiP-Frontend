@@ -30,6 +30,7 @@ import { PessoaExcluir } from './features/pessoa/pages/pessoa-excluir/pessoa-exc
 import { PessoaAlterar } from './features/pessoa/pages/pessoa-alterar/pessoa-alterar';
 import { Home } from './features/home/home';
 import { AcervoConsulta } from './features/acervo/pages/acervo-consulta/acervo-consulta';
+import { MeusEmprestimos } from './features/emprestimo/pages/meus-emprestimos/meus-emprestimos';
 
 
 export const routes: Routes = [
@@ -94,7 +95,8 @@ export const routes: Routes = [
                             { path: '', component: EmprestimoListar },
                             { path: 'adicionar', component: EmprestimoAdicionar },
                             { path: 'devolver', component: EmprestimoDevolver },
-                            { path: 'renovar', component: EmprestimoRenovar }
+                            { path: 'renovar', component: EmprestimoRenovar },
+                            { path: 'meus-emprestimos', component: MeusEmprestimos}
                         ]
                     },
                     {
