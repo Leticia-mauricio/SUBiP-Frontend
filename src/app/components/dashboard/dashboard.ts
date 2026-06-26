@@ -48,7 +48,7 @@ export class Dashboard {
       descricao: 'Renovar Empréstimo',
       rota: '/gerenciar/emprestimos/renovar',
       icone: '📖',
-      perfis: ['ATENDENTE', 'LEITOR']
+      perfis: ['ATENDENTE']
     },
 
     {
