@@ -1,0 +1,166 @@
+<div class="container">
+
+    <div class="page-header">
+
+        <span class="breadcrumb">
+            Início > Minhas Reservas
+        </span>
+
+        <h1>Minhas Reservas</h1>
+
+        <p>
+            Consulte suas reservas ativas, acompanhe sua disponibilidade e visualize o histórico de reservas.
+        </p>
+
+    </div>
+
+    @if(carregando){
+
+        <p>Carregando reservas...</p>
+
+    } @else {
+
+        <section class="ativas">
+
+            <h2>📚 Reservas Ativas</h2>
+
+            @if(possuiReservasAtivas()){
+
+                <div class="cards">
+
+                    @for(reserva of reservasAtivas; track reserva.id){
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>{{ reserva.tituloLivro }}</h3>
+
+                                <span class="status">
+                                    {{ reserva.situacao }}
+                                </span>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <p>
+                                    <strong>Biblioteca:</strong>
+                                    {{ reserva.nomeBiblioteca }}
+                                </p>
+
+                                <p>
+                                    <strong>Data da Reserva:</strong>
+                                    {{ reserva.dataReserva }}
+                                </p>
+
+                                @if(reserva.dataDisponibilizacao){
+
+                                    <p>
+                                        <strong>Disponível desde:</strong>
+                                        {{ reserva.dataDisponibilizacao }}
+                                    </p>
+
+                                }
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <button
+                                    class="btn-danger"
+                                    (click)="cancelarReserva(reserva.id)">
+
+                                    Cancelar Reserva
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    }
+
+                </div>
+
+            } @else {
+
+                <div class="empty">
+
+                    Você não possui reservas ativas.
+
+                </div>
+
+            }
+
+        </section>
+
+        <section class="historico">
+
+            <h2>📖 Histórico de Reservas</h2>
+
+            @if(possuiHistorico()){
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Livro</th>
+                            <th>Biblioteca</th>
+                            <th>Data da Reserva</th>
+                            <th>Disponibilização</th>
+                            <th>Situação</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @for(reserva of historicoReservas; track reserva.id){
+
+                            <tr>
+
+                                <td>{{ reserva.tituloLivro }}</td>
+
+                                <td>{{ reserva.nomeBiblioteca }}</td>
+
+                                <td>{{ reserva.dataReserva }}</td>
+
+                                <td>{{ reserva.dataDisponibilizacao }}</td>
+
+                                <td>
+
+                                    <span class="status historico-status">
+
+                                        {{ reserva.situacao }}
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            } @else {
+
+                <div class="empty">
+
+                    Nenhuma reserva encontrada.
+
+                </div>
+
+            }
+
+        </section>
+
+    }
+
+</div>

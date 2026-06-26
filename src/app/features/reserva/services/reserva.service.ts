@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Reserva } from '../models/reserva';
+import { MinhaReserva } from '../models/minha-reserva';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ReservaService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   listar(): Observable<Reserva[]> {
     return this.http.get<Reserva[]>(this.apiUrl);
@@ -38,6 +39,16 @@ export class ReservaService {
       `${this.apiUrl}/${id}/cancelamento`,
       {}
     );
+  }
+
+  listarPorLeitor(
+    pessoaId: number
+  ): Observable<MinhaReserva[]> {
+
+    return this.http.get<MinhaReserva[]>(
+      `${this.apiUrl}/leitor/${pessoaId}`
+    );
+
   }
 
 }
