@@ -9,7 +9,7 @@ import { Livro } from '../models/livro';
 })
 export class LivroService {
 
-  private readonly apiUrl = 'http://localhost:8080/Livros';
+  private readonly apiUrl = 'http://localhost:8080/livros';
 
   constructor(private http: HttpClient) { }
 
