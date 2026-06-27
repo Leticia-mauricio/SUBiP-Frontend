@@ -16,34 +16,28 @@
 
     <div class="card">
       <h3>📚 Identificação do Exemplar</h3>
-
       <div class="form-group">
         <label for="exemplarId">ID do Exemplar</label>
-
-        <input
-          id="exemplarId"
-          type="number"
-          name="exemplarId"
-          placeholder="Ex.: 1"
-          min="1"
-          [(ngModel)]="emprestimo.exemplarId"
-        />
+        <input id="exemplarId" type="number" name="exemplarId" placeholder="Ex.: 1" min="1"
+          [(ngModel)]="emprestimo.exemplarId" />
       </div>
+
+      @if (nomeLeitor) {
+      <div class="info-box">
+        <div class="info-item">
+          <span class="label">Leitor</span>
+          <span class="value">{{ nomeLeitor }}</span>
+        </div>
+      </div>
+      }
+      
     </div>
 
     <div class="card">
       <h3>👤 Identificação do Leitor</h3>
-
       <div class="form-group">
-        <label for="pessoaId">ID do Leitor</label>
-
-        <input
-          id="pessoaId"
-          type="number"
-          name="pessoaId"
-          placeholder="Ex.: 1"
-          min="1"
-          [(ngModel)]="emprestimo.pessoaId"
+        <label for="cpf">CPF do Leitor</label>
+        <input id="cpf" type="text" name="cpf" placeholder="000.000.000-00" [(ngModel)]="cpf" (blur)="buscarLeitor()" />
         />
       </div>
     </div>
@@ -76,24 +70,18 @@
     </div>
 
     @if (erro) {
-      <div class="erro-msg">
-        {{ erro }}
-      </div>
+    <div class="erro-msg">
+      {{ erro }}
+    </div>
     }
 
     <div class="actions">
 
-      <button
-        type="button"
-        class="btn-cancelar"
-        (click)="cancelar()">
+      <button type="button" class="btn-cancelar" (click)="cancelar()">
         Cancelar
       </button>
 
-      <button
-        type="button"
-        class="btn-confirmar"
-        (click)="salvar()">
+      <button type="button" class="btn-confirmar" (click)="salvar()">
         Confirmar Empréstimo
       </button>
 
