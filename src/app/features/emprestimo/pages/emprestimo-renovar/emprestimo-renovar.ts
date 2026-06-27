@@ -129,9 +129,9 @@ export class EmprestimoRenovar implements OnInit {
 
     this.nomeBiblioteca = biblioteca?.nome ?? '';
 
-    this.dataRetirada = emprestimo.dataRetirada;
+    this.dataRetirada = new Date(emprestimo.dataRetirada).toLocaleDateString('pt-BR');
 
-    this.dataPrevista = emprestimo.dataDevolucaoPrevista;
+    this.dataPrevista = new Date(emprestimo.dataDevolucaoPrevista).toLocaleDateString('pt-BR');
 
     const hoje = new Date();
 
