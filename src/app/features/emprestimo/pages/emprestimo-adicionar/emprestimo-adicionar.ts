@@ -6,6 +6,10 @@ import { EmprestimoService } from '../../services/emprestimo.service';
 import { EmprestimoCadastro } from '../../models/emprestimo-cadastro';
 import { Pessoa } from '../../../pessoa/models/pessoa';
 import { PessoaService } from '../../../pessoa/services/pessoa.service';
+import { Exemplar } from '../../../exemplar/models/exemplar';
+import { Livro } from '../../../livro/models/livro';
+import { ExemplarService } from '../../../exemplar/services/exemplar.service';
+import { LivroService } from '../../../livro/services/livro.service';
 
 @Component({
   selector: 'app-emprestimo-adicionar',
@@ -28,6 +32,12 @@ export class EmprestimoAdicionar implements OnInit {
   cpf = '';
   nomeLeitor = '';
 
+  exemplares: Exemplar[] = [];
+  livros: Livro[] = [];
+
+  tombo = '';
+  tituloLivro = '';
+
   hoje = new Date().toLocaleDateString('pt-BR');
 
   get dataDevolucaoPrevista(): string {
@@ -39,17 +49,27 @@ export class EmprestimoAdicionar implements OnInit {
   constructor(
     private emprestimoService: EmprestimoService,
     private pessoaService: PessoaService,
+    private exemplarService: ExemplarService,
+    private livroService: LivroService,
     private router: Router
   ) { }
 
 
   ngOnInit(): void {
-    this.pessoaService.listar().subscribe({
-      next: (pessoas) => {
-        this.leitores = pessoas;
-      }
-    });
-  }
+
+  this.pessoaService.listar().subscribe({
+    next: pessoas => this.leitores = pessoas
+  });
+
+  this.exemplarService.listar().subscribe({
+    next: exemplares => this.exemplares = exemplares
+  });
+
+  this.livroService.listar().subscribe({
+    next: livros => this.livros = livros
+  });
+
+}
 
   buscarLeitor(): void {
 
