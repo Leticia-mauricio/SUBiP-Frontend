@@ -1,75 +1,102 @@
 <div class="emprestimo-container">
 
   <div class="page-header">
-    <span class="breadcrumb">Empréstimos > Novo Empréstimo</span>
+    <span class="breadcrumb">
+      Empréstimos > Novo Empréstimo
+    </span>
+
     <h1>Registrar Novo Empréstimo</h1>
-    <p>Preencha as informações abaixo para registrar o empréstimo.</p>
+
+    <p>
+      Preencha as informações abaixo para registrar o empréstimo.
+    </p>
   </div>
 
   <form class="emprestimo-form">
 
     <div class="card">
       <h3>📚 Identificação do Exemplar</h3>
+
       <div class="form-group">
         <label for="exemplarId">ID do Exemplar</label>
+
         <input
           id="exemplarId"
           type="number"
-          placeholder="Ex.: 1"
-          [(ngModel)]="emprestimo.exemplarId"
           name="exemplarId"
+          placeholder="Ex.: 1"
           min="1"
+          [(ngModel)]="emprestimo.exemplarId"
         />
       </div>
     </div>
 
     <div class="card">
       <h3>👤 Identificação do Leitor</h3>
+
       <div class="form-group">
         <label for="pessoaId">ID do Leitor</label>
+
         <input
           id="pessoaId"
           type="number"
-          placeholder="Ex.: 1"
-          [(ngModel)]="emprestimo.pessoaId"
           name="pessoaId"
+          placeholder="Ex.: 1"
           min="1"
+          [(ngModel)]="emprestimo.pessoaId"
         />
       </div>
     </div>
 
     <div class="card">
       <h3>ℹ️ Informações do Empréstimo</h3>
-      <div class="form-group">
-        <label for="dataRetirada">Data de Retirada</label>
-        <input
-          id="dataRetirada"
-          type="date"
-          [(ngModel)]="emprestimo.dataRetirada"
-          name="dataRetirada"
-          [value]="hoje"
-        />
-      </div>
+
       <div class="info-box">
+
+        <div class="info-item">
+          <span class="label">Data de Retirada</span>
+          <span class="value">
+            {{ hoje }}
+          </span>
+        </div>
+
         <div class="info-item">
           <span class="label">Data Prevista de Devolução</span>
-          <span class="value destaque">{{ dataDevolucaoPrevista }}</span>
+          <span class="value destaque">
+            {{ dataDevolucaoPrevista }}
+          </span>
         </div>
+
       </div>
-      <p class="observacao">Prazo padrão de 15 dias corridos.</p>
+
+      <p class="observacao">
+        Prazo padrão de 15 dias corridos.
+      </p>
+
     </div>
 
     @if (erro) {
-      <div class="erro-msg">{{ erro }}</div>
+      <div class="erro-msg">
+        {{ erro }}
+      </div>
     }
 
     <div class="actions">
-      <button type="button" class="btn-cancelar" (click)="cancelar()">
+
+      <button
+        type="button"
+        class="btn-cancelar"
+        (click)="cancelar()">
         Cancelar
       </button>
-      <button type="button" class="btn-confirmar" (click)="salvar()">
+
+      <button
+        type="button"
+        class="btn-confirmar"
+        (click)="salvar()">
         Confirmar Empréstimo
       </button>
+
     </div>
 
   </form>
