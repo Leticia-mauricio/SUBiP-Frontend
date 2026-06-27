@@ -21,14 +21,20 @@
       <input id="tombo" type="text" name="tombo" placeholder="Ex.: TMB-001" [(ngModel)]="tombo"
         (blur)="buscarExemplar()" />
 
-      @if (nomeLeitor) {
+
+      @if (tituloLivro) {
+
       <div class="info-box">
         <div class="info-item">
-          <span class="label">Leitor</span>
-          <span class="value">{{ nomeLeitor }}</span>
+          <span class="label">Livro</span>
+          <span class="value">
+            {{ tituloLivro }}
+          </span>
         </div>
       </div>
+
       }
+
 
     </div>
 
@@ -37,7 +43,14 @@
       <div class="form-group">
         <label for="cpf">CPF do Leitor</label>
         <input id="cpf" type="text" name="cpf" placeholder="000.000.000-00" [(ngModel)]="cpf" (blur)="buscarLeitor()" />
-        />
+        @if (nomeLeitor) {
+        <div class="info-box">
+          <div class="info-item">
+            <span class="label">Leitor</span>
+            <span class="value">{{ nomeLeitor }}</span>
+          </div>
+        </div>
+      }
       </div>
     </div>
 
