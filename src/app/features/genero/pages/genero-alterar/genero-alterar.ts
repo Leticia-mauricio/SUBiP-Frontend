@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Genero } from '../../models/genero';
 import { GeneroService } from '../../services/genero.service';
@@ -13,13 +13,13 @@ import { GeneroService } from '../../services/genero.service';
 })
 export class GeneroAlterar implements OnInit {
 
-  genero: Genero = {
-    descricao: ''
-  };
+  genero: Genero = { descricao: '' };
+  erro: string = '';
 
   constructor(
     private generoService: GeneroService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,34 +27,27 @@ export class GeneroAlterar implements OnInit {
   }
 
   buscar(): void {
-
     const id = Number(this.route.snapshot.paramMap.get('id'));
-
     if (!id) return;
-
-    this.generoService
-      .buscarPorId(id)
-      .subscribe({
-        next: (genero) => {
-          this.genero = genero;
-        },
-        error: (erro) => {
-          console.error(erro);
-        }
-      });
+    this.generoService.buscarPorId(id).subscribe({
+      next: (genero) => { this.genero = genero; },
+      error: (erro) => { console.error(erro); }
+    });
   }
 
   salvar(): void {
+    this.erro = '';
+    this.generoService.salvar(this.genero).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/generos']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao alterar gênero.';
+      }
+    });
+  }
 
-    this.generoService
-      .salvar(this.genero)
-      .subscribe({
-        next: (genero) => {
-          console.log('genero atualizada', genero);
-        },
-        error: (erro) => {
-          console.error(erro);
-        }
-      });
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/generos']);
   }
 }

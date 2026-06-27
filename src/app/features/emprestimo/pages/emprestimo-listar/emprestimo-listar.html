@@ -1,1 +1,45 @@
-<p>emprestimo-listar works!</p>
+<h2>Empréstimos</h2>
+
+<a routerLink="/gerenciar/emprestimos/adicionar">
+  Novo Empréstimo
+</a>
+
+<br><br>
+
+<table border="1">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Livro</th>
+      <th>Leitor</th>
+      <th>Tombo</th>
+      <th>Retirada</th>
+      <th>Devolução Prevista</th>
+      <th>Situação</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    @for (emprestimo of emprestimos; track emprestimo.id) {
+      <tr>
+        <td>{{ emprestimo.id }}</td>
+        <td>{{ emprestimo.tituloLivro }}</td>
+        <td>{{ emprestimo.pessoaNome }}</td>
+        <td>{{ emprestimo.tombo }}</td>
+        <td>{{ emprestimo.dataRetirada }}</td>
+        <td>{{ emprestimo.dataDevolucaoPrevista }}</td>
+        <td>{{ emprestimo.situacao }}</td>
+        <td>
+          <a routerLink="/gerenciar/emprestimos/devolver">Devolver</a>
+          |
+          <a routerLink="/gerenciar/emprestimos/renovar">Renovar</a>
+        </td>
+      </tr>
+    }
+
+  </tbody>
+
+</table>

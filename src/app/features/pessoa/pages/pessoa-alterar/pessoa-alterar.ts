@@ -1,9 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Pessoa } from '../../models/pessoa';
+import { PessoaService } from '../../services/pessoa.service';
 
 @Component({
   selector: 'app-pessoa-alterar',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './pessoa-alterar.html',
   styleUrl: './pessoa-alterar.css',
 })
-export class PessoaAlterar {}
+export class PessoaAlterar implements OnInit {
+
+  pessoa: Pessoa = { nome: '', cpf: '', email: '' };
+  erro: string = '';
+
+  constructor(
+    private pessoaService: PessoaService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (!id) return;
+    this.pessoaService.buscarPorId(id).subscribe({
+      next: (pessoa) => { this.pessoa = pessoa; },
+      error: (erro) => { console.error(erro); }
+    });
+  }
+
+  salvar(): void {
+    this.erro = '';
+    this.pessoaService.salvar(this.pessoa).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/pessoas']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao alterar pessoa.';
+      }
+    });
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/pessoas']);
+  }
+}

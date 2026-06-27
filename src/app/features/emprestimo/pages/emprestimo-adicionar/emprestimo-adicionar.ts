@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { EmprestimoService } from '../../services/emprestimo.service';
 import { EmprestimoCadastro } from '../../models/emprestimo-cadastro';
@@ -18,31 +19,34 @@ export class EmprestimoAdicionar {
     pessoaId: 0
   };
 
-  constructor(
-    private emprestimoService: EmprestimoService
-  ) { }
+  erro: string = '';
 
-  //dataAtual = new Date();
-  
-  hoje = new Date().toLocaleDateString('pt-BR');
+  hoje = new Date().toISOString().split('T')[0];
 
   get dataDevolucaoPrevista(): string {
     const data = new Date();
     data.setDate(data.getDate() + 15);
-
     return data.toLocaleDateString('pt-BR');
   }
 
+  constructor(
+    private emprestimoService: EmprestimoService,
+    private router: Router
+  ) { }
+
   salvar(): void {
-    this.emprestimoService
-      .salvar(this.emprestimo)
-      .subscribe({
-        next: (resposta) => {
-          console.log('emprestimo salvo', resposta);
-        },
-        error: (erro) => {
-          console.error('Erro', erro);
-        }
-      });
+    this.erro = '';
+    this.emprestimoService.salvar(this.emprestimo).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/emprestimos']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.';
+      }
+    });
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/emprestimos']);
   }
 }

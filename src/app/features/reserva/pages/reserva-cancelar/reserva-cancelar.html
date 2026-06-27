@@ -1,1 +1,17 @@
-<p>reserva-excluir works!</p>
+<h2>Cancelar Reserva</h2>
+
+<p>Deseja realmente cancelar a reserva?</p>
+
+@if (reserva) {
+  <p><strong>Livro:</strong> {{ reserva.tituloLivro }}</p>
+  <p><strong>Leitor:</strong> {{ reserva.pessoaNome }}</p>
+  <p><strong>Tombo:</strong> {{ reserva.tombo }}</p>
+  <p><strong>Data Registro:</strong> {{ reserva.dataRegistro }}</p>
+}
+
+@if (erro) {
+  <p style="color:red">{{ erro }}</p>
+}
+
+<button type="button" (click)="voltar()" style="margin-right:8px">Voltar</button>
+<button type="button" (click)="cancelar()">Cancelar Reserva</button>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { EmprestimoService } from '../../services/emprestimo.service';
 import { EmprestimoRenovacao } from '../../models/emprestimo-renovacao';
@@ -18,26 +19,26 @@ export class EmprestimoRenovar {
     dataDevolucaoPrevista: ''
   };
 
+  erro: string = '';
+
   constructor(
-    private emprestimoService: EmprestimoService
+    private emprestimoService: EmprestimoService,
+    private router: Router
   ) {}
 
   renovar(): void {
-
-    this.emprestimoService
-      .renovar(
-        this.emprestimoId,
-        this.renovacao
-      )
-      .subscribe({
-        next: (resposta) => {
-          console.log('Empréstimo renovado', resposta);
-        },
-        error: (erro) => {
-          console.error(erro);
-        }
-      });
-
+    this.erro = '';
+    this.emprestimoService.renovar(this.emprestimoId, this.renovacao).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/emprestimos']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao renovar empréstimo.';
+      }
+    });
   }
 
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/emprestimos']);
+  }
 }

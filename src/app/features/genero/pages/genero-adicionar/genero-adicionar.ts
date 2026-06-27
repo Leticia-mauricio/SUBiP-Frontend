@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Genero } from '../../models/genero'
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { Genero } from '../../models/genero'
 import { GeneroService } from '../../services/genero.service';
 
 @Component({
@@ -10,24 +12,27 @@ import { GeneroService } from '../../services/genero.service';
   styleUrl: './genero-adicionar.css',
 })
 export class GeneroAdicionar {
-  genero: Genero = {
-    descricao: ''
-  };
+  genero: Genero = { descricao: '' };
+  erro: string = '';
 
   constructor(
-    private generoService: GeneroService
+    private generoService: GeneroService,
+    private router: Router
   ) { }
 
   salvar(): void {
-    this.generoService
-      .salvar(this.genero)
-      .subscribe({
-        next: (resposta) => {
-          console.log('genero salva', resposta);
-        },
-        error: (erro) => {
-          console.error('Erro', erro);
-        }
-      });
+    this.erro = '';
+    this.generoService.salvar(this.genero).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/generos']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao salvar gênero.';
+      }
+    });
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/generos']);
   }
 }

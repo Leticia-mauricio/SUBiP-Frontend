@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Biblioteca } from '../../models/biblioteca'
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { Biblioteca } from '../../models/biblioteca'
 import { BibliotecaService } from '../../services/biblioteca.service';
 
 @Component({
@@ -10,24 +12,27 @@ import { BibliotecaService } from '../../services/biblioteca.service';
   styleUrl: './biblioteca-adicionar.css',
 })
 export class BibliotecaAdicionar {
-  biblioteca: Biblioteca = {
-    nome: ''
-  };
+  biblioteca: Biblioteca = { nome: '' };
+  erro: string = '';
 
   constructor(
-    private bibliotecaService: BibliotecaService
+    private bibliotecaService: BibliotecaService,
+    private router: Router
   ) { }
 
   salvar(): void {
-    this.bibliotecaService
-      .salvar(this.biblioteca)
-      .subscribe({
-        next: (resposta) => {
-          console.log('Biblioteca salva', resposta);
-        },
-        error: (erro) => {
-          console.error('Erro', erro);
-        }
-      });
+    this.erro = '';
+    this.bibliotecaService.salvar(this.biblioteca).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/bibliotecas']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao salvar biblioteca.';
+      }
+    });
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/bibliotecas']);
   }
 }

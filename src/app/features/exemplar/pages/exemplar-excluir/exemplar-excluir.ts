@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Exemplar } from '../../models/exemplar';
 import { ExemplarService } from '../../services/exemplar.service';
@@ -20,9 +20,12 @@ export class ExemplarExcluir implements OnInit {
     idBiblioteca: 0
   };
 
+  erro: string = '';
+
   constructor(
     private ExemplarService: ExemplarService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,34 +34,27 @@ export class ExemplarExcluir implements OnInit {
 
   buscar(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.ExemplarService
-      .buscarPorId(id)
-      .subscribe({
-        next: (exemplar) => {
-          this.exemplar = exemplar;
-        },
-        error: (erro) => {
-          console.error(erro);
-        }
-      });
+    this.ExemplarService.buscarPorId(id).subscribe({
+      next: (exemplar) => { this.exemplar = exemplar; },
+      error: (erro) => { console.error(erro); }
+    });
   }
 
   excluir(): void {
-
+    this.erro = '';
     const id = Number(this.route.snapshot.paramMap.get('id'));
-
     if (!id) return;
+    this.ExemplarService.excluir(id).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/exemplares']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao excluir exemplar.';
+      }
+    });
+  }
 
-    this.ExemplarService
-      .excluir(id)
-      .subscribe({
-        next: () => {
-          console.log('Exemplar excluído');
-        },
-        error: (erro) => {
-          console.error(erro);
-        }
-      });
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/exemplares']);
   }
 }

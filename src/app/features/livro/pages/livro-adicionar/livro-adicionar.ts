@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Livro } from '../../models/livro'
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { Livro } from '../../models/livro'
 import { LivroService } from '../../services/livro.service';
 
 @Component({
@@ -18,20 +20,28 @@ export class LivroAdicionar {
     generoDescricao: ''
   };
 
+  erro: string = '';
+
   constructor(
-    private livroService: LivroService
+    private livroService: LivroService,
+    private router: Router
   ) { }
 
   salvar(): void {
+    this.erro = '';
     this.livroService
       .salvar(this.livro)
       .subscribe({
-        next: (resposta) => {
-          console.log('Livro salvo', resposta);
+        next: () => {
+          this.router.navigate(['/gerenciar/livros']);
         },
         error: (erro) => {
-          console.error('Erro', erro);
+          this.erro = erro?.error?.message || 'Erro ao salvar livro.';
         }
       });
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/livros']);
   }
 }

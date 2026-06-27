@@ -1,1 +1,12 @@
-<p>pessoa-excluir works!</p>
+<h2>Excluir Pessoa</h2>
+
+<p>Deseja realmente excluir a pessoa?</p>
+
+<p><strong>{{ pessoa.nome }}</strong> — {{ pessoa.cpf }}</p>
+
+@if (erro) {
+  <p style="color:red">{{ erro }}</p>
+}
+
+<button type="button" (click)="cancelar()" style="margin-right:8px">Cancelar</button>
+<button type="button" (click)="excluir()">Excluir</button>

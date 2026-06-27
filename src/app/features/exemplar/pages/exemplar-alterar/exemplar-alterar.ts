@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Exemplar } from '../../models/exemplar';
 import { ExemplarService } from '../../services/exemplar.service';
@@ -21,9 +21,12 @@ export class ExemplarAlterar implements OnInit {
     idBiblioteca: 0
   };
 
+  erro: string = '';
+
   constructor(
     private ExemplarService: ExemplarService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,34 +34,27 @@ export class ExemplarAlterar implements OnInit {
   }
 
   buscar(): void {
-
     const id = Number(this.route.snapshot.paramMap.get('id'));
-
     if (!id) return;
-
-    this.ExemplarService
-      .buscarPorId(id)
-      .subscribe({
-        next: (exemplar) => {
-          this.exemplar = exemplar;
-        },
-        error: (erro) => {
-          console.error(erro);
-        }
-      });
+    this.ExemplarService.buscarPorId(id).subscribe({
+      next: (exemplar) => { this.exemplar = exemplar; },
+      error: (erro) => { console.error(erro); }
+    });
   }
 
   salvar(): void {
+    this.erro = '';
+    this.ExemplarService.salvar(this.exemplar).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/exemplares']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao alterar exemplar.';
+      }
+    });
+  }
 
-    this.ExemplarService
-      .salvar(this.exemplar)
-      .subscribe({
-        next: (exemplar) => {
-          console.log('Exemplar atualizado', exemplar);
-        },
-        error: (erro) => {
-          console.error(erro);
-        }
-      });
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/exemplares']);
   }
 }

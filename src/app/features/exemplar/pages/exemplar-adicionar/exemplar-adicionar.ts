@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Exemplar } from '../../models/exemplar'
 import { ExemplarService } from '../../services/exemplar.service';
@@ -20,20 +21,26 @@ export class ExemplarAdicionar {
     idBiblioteca: 0
   };
 
+  erro: string = '';
+
   constructor(
-    private exemplarService: ExemplarService
+    private exemplarService: ExemplarService,
+    private router: Router
   ) { }
 
   salvar(): void {
-    this.exemplarService
-      .salvar(this.exemplar)
-      .subscribe({
-        next: (resposta) => {
-          console.log('Exemplar salvo', resposta);
-        },
-        error: (erro) => {
-          console.error('Erro', erro);
-        }
-      });
+    this.erro = '';
+    this.exemplarService.salvar(this.exemplar).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/exemplares']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao salvar exemplar.';
+      }
+    });
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/gerenciar/exemplares']);
   }
 }

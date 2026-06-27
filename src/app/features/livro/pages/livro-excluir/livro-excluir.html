@@ -6,6 +6,11 @@
   <strong>{{ livro.titulo }}</strong>
 </p>
 
-<button (click)="excluir()">
+@if (erro) {
+  <p style="color:red">{{ erro }}</p>
+}
+
+<button type="button" (click)="cancelar()" style="margin-right:8px">Cancelar</button>
+<button type="button" (click)="excluir()">
   Excluir
 </button>

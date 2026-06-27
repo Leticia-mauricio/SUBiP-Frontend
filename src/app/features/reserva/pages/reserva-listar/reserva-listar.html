@@ -1,1 +1,41 @@
-<p>reserva-listar works!</p>
+<h2>Reservas</h2>
+
+<a routerLink="/gerenciar/reservas/adicionar">
+  Nova Reserva
+</a>
+
+<br><br>
+
+<table border="1">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Livro</th>
+      <th>Leitor</th>
+      <th>Tombo</th>
+      <th>Data Registro</th>
+      <th>Situação</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    @for (reserva of reservas; track reserva.id) {
+      <tr>
+        <td>{{ reserva.id }}</td>
+        <td>{{ reserva.tituloLivro }}</td>
+        <td>{{ reserva.pessoaNome }}</td>
+        <td>{{ reserva.tombo }}</td>
+        <td>{{ reserva.dataRegistro }}</td>
+        <td>{{ reserva.situacao }}</td>
+        <td>
+          <a [routerLink]="['/gerenciar/reservas/excluir', reserva.id]">Cancelar</a>
+        </td>
+      </tr>
+    }
+
+  </tbody>
+
+</table>
