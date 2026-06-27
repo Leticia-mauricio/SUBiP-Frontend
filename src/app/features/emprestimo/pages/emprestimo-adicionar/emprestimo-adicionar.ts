@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { EmprestimoService } from '../../services/emprestimo.service';
 import { EmprestimoCadastro } from '../../models/emprestimo-cadastro';
+import { Pessoa } from '../../../pessoa/models/pessoa';
+import { PessoaService } from '../../../pessoa/services/pessoa.service';
 
 @Component({
   selector: 'app-emprestimo-adicionar',
@@ -11,7 +13,7 @@ import { EmprestimoCadastro } from '../../models/emprestimo-cadastro';
   templateUrl: './emprestimo-adicionar.html',
   styleUrl: './emprestimo-adicionar.css',
 })
-export class EmprestimoAdicionar {
+export class EmprestimoAdicionar implements OnInit {
 
   emprestimo: EmprestimoCadastro = {
     dataRetirada: '',
@@ -20,6 +22,11 @@ export class EmprestimoAdicionar {
   };
 
   erro: string = '';
+
+  leitores: Pessoa[] = [];
+
+  cpf = '';
+  nomeLeitor = '';
 
   hoje = new Date().toLocaleDateString('pt-BR');
 
@@ -31,23 +38,51 @@ export class EmprestimoAdicionar {
 
   constructor(
     private emprestimoService: EmprestimoService,
+    private pessoaService: PessoaService,
     private router: Router
   ) { }
 
-  salvar(): void {
-  this.erro = '';
 
-  this.emprestimo.dataRetirada = new Date().toISOString().split('T')[0];
+  ngOnInit(): void {
+    this.pessoaService.listar().subscribe({
+      next: (pessoas) => {
+        this.leitores = pessoas;
+      }
+    });
+  }
 
-  this.emprestimoService.salvar(this.emprestimo).subscribe({
-    next: () => {
-      this.router.navigate(['/gerenciar/emprestimos']);
-    },
-    error: (erro) => {
-      this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.';
+  buscarLeitor(): void {
+
+    const leitor = this.leitores.find(
+      p => p.cpf.replace(/\D/g, '') === this.cpf.replace(/\D/g, '')
+    );
+
+    if (leitor) {
+      this.nomeLeitor = leitor.nome;
+      this.emprestimo.pessoaId = leitor.id!;
+      this.erro = '';
+    } else {
+      this.nomeLeitor = '';
+      this.emprestimo.pessoaId = 0;
+      this.erro = 'Leitor não encontrado.';
     }
-  });
-}
+
+  }
+
+  salvar(): void {
+    this.erro = '';
+
+    this.emprestimo.dataRetirada = new Date().toISOString().split('T')[0];
+
+    this.emprestimoService.salvar(this.emprestimo).subscribe({
+      next: () => {
+        this.router.navigate(['/gerenciar/emprestimos']);
+      },
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.';
+      }
+    });
+  }
 
   cancelar(): void {
     this.router.navigate(['/gerenciar/emprestimos']);
