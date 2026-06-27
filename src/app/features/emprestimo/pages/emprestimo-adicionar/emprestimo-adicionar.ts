@@ -21,7 +21,7 @@ export class EmprestimoAdicionar {
 
   erro: string = '';
 
-  hoje = new Date().toISOString().split('T')[0];
+  hoje = new Date().toLocaleDateString('pt-BR');
 
   get dataDevolucaoPrevista(): string {
     const data = new Date();
@@ -35,16 +35,19 @@ export class EmprestimoAdicionar {
   ) { }
 
   salvar(): void {
-    this.erro = '';
-    this.emprestimoService.salvar(this.emprestimo).subscribe({
-      next: () => {
-        this.router.navigate(['/gerenciar/emprestimos']);
-      },
-      error: (erro) => {
-        this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.';
-      }
-    });
-  }
+  this.erro = '';
+
+  this.emprestimo.dataRetirada = new Date().toISOString().split('T')[0];
+
+  this.emprestimoService.salvar(this.emprestimo).subscribe({
+    next: () => {
+      this.router.navigate(['/gerenciar/emprestimos']);
+    },
+    error: (erro) => {
+      this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.';
+    }
+  });
+}
 
   cancelar(): void {
     this.router.navigate(['/gerenciar/emprestimos']);
