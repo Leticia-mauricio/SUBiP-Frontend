@@ -95,8 +95,10 @@
         Cancelar
       </button>
 
-      <button type="button" class="btn-confirmar" (click)="salvar()">
-        Confirmar Empréstimo
+      <button type="button" class="btn-confirmar" (click)="renovar()" [disabled]="!emprestimoEncontrado">
+
+        Confirmar Renovação
+
       </button>
 
     </div>
