@@ -40,6 +40,7 @@ export class EmprestimoRenovar implements OnInit {
 
   dataRetirada = '';
   dataPrevista = '';
+  novaDataPrevista = '';
 
   atrasado = false;
   diasAtraso = 0;
@@ -150,9 +151,13 @@ export class EmprestimoRenovar implements OnInit {
     const novaData = new Date(emprestimo.dataDevolucaoPrevista);
     novaData.setDate(novaData.getDate() + 15);
 
+    // Envia para o backend
     this.renovacao.dataDevolucaoPrevista = novaData
       .toISOString()
       .split('T')[0];
+
+    // Exibe na tela
+    this.novaDataPrevista = novaData.toLocaleDateString('pt-BR');
   }
 
   renovar(): void {
