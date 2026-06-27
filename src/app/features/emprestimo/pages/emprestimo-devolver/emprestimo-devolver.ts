@@ -64,7 +64,8 @@ export class EmprestimoDevolver implements OnInit {
 
   ngOnInit(): void {
 
-    this.devolucao.dataDevolucao = new Date().toISOString().split('T')[0];
+    //this.devolucao.dataDevolucao = new Date().toISOString().split('T')[0];
+    this.devolucao.dataDevolucao = this.hoje;
 
     this.emprestimoService.listar().subscribe(e => this.emprestimos = e);
 

@@ -1,9 +1,15 @@
 <div class="emprestimo-container">
 
   <div class="page-header">
-    <span class="breadcrumb">Empréstimos > Registrar Devolução</span>
+    <span class="breadcrumb">
+      Empréstimos > Registrar Devolução
+    </span>
+
     <h1>Registrar Devolução</h1>
-    <p>Informe o ID do empréstimo para registrar a devolução.</p>
+
+    <p>
+      Informe o tombo do exemplar para registrar a devolução.
+    </p>
   </div>
 
   <form class="emprestimo-form">
@@ -14,9 +20,16 @@
 
       <div class="form-group">
 
-        <label>Tombo do Exemplar</label>
+        <label for="tombo">Tombo do Exemplar</label>
 
-        <input type="text" [(ngModel)]="tombo" name="tombo" placeholder="TOMBO-0001" (blur)="buscarExemplar()">
+        <input
+          id="tombo"
+          type="text"
+          name="tombo"
+          placeholder="Ex.: TOMBO-0001"
+          [(ngModel)]="tombo"
+          (blur)="buscarExemplar()"
+        />
 
       </div>
 
@@ -24,89 +37,98 @@
 
     @if (emprestimoEncontrado) {
 
-    <div class="card">
+      <div class="card">
 
-      <h3>ℹ Informações do Empréstimo</h3>
+        <h3>ℹ️ Informações do Empréstimo</h3>
 
-      <div class="info-box">
+        <div class="info-box">
 
-        <div class="info-item">
-          <span class="label">Livro</span>
-          <span class="value">{{ tituloLivro }}</span>
-        </div>
+          <div class="info-item">
+            <span class="label">Livro</span>
+            <span class="value">{{ tituloLivro }}</span>
+          </div>
 
-        <div class="info-item">
-          <span class="label">Leitor</span>
-          <span class="value">{{ nomeLeitor }}</span>
-        </div>
+          <div class="info-item">
+            <span class="label">Leitor</span>
+            <span class="value">{{ nomeLeitor }}</span>
+          </div>
 
-        <div class="info-item">
-          <span class="label">Biblioteca</span>
-          <span class="value">{{ nomeBiblioteca }}</span>
-        </div>
+          <div class="info-item">
+            <span class="label">Biblioteca</span>
+            <span class="value">{{ nomeBiblioteca }}</span>
+          </div>
 
-        <div class="info-item">
-          <span class="label">Retirada</span>
-          <span class="value">{{ dataRetirada }}</span>
-        </div>
+          <div class="info-item">
+            <span class="label">Data da Retirada</span>
+            <span class="value">
+              {{ dataRetirada | date:'dd/MM/yyyy' }}
+            </span>
+          </div>
 
-        <div class="info-item">
-          <span class="label">Prevista</span>
-          <span class="value">{{ dataPrevista }}</span>
-        </div>
+          <div class="info-item">
+            <span class="label">Data Prevista de Devolução</span>
+            <span class="value">
+              {{ dataPrevista | date:'dd/MM/yyyy' }}
+            </span>
+          </div>
 
-        <div class="info-item">
+          <div class="info-item">
+            <span class="label">Situação</span>
 
-          <span class="label">Situação</span>
+            @if (atrasado) {
 
-          @if (atrasado) {
+              <span class="value destaque">
+                Atrasado ({{ diasAtraso }} dias)
+              </span>
 
-          <span class="value destaque">
-            Atrasado ({{ diasAtraso }} dias)
-          </span>
+            } @else {
 
-          } @else {
+              <span class="value">
+                Em dia
+              </span>
 
-          <span class="value">
-            Em dia
-          </span>
+            }
 
-          }
+          </div>
 
-        </div>
+          <div class="info-item">
+            <span class="label">Data de Devolução</span>
+            <span class="value">
+              {{ hoje | date:'dd/MM/yyyy' }}
+            </span>
+          </div>
 
-        <div class="info-item">
-          <span class="label">Data de Devolução</span>
-          <span class="value">{{ hoje }}</span>
         </div>
 
       </div>
 
-    </div>
-
     }
 
-    <div class="form-group">
-      <label for="dataDevolucao">Data de Devolução</label>
-      <input id="dataDevolucao" type="date" [(ngModel)]="devolucao.dataDevolucao" name="dataDevolucao" [max]="hoje" />
+    @if (erro) {
+      <div class="erro-msg">
+        {{ erro }}
+      </div>
+    }
+
+    <div class="actions">
+
+      <button
+        type="button"
+        class="btn-cancelar"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        class="btn-confirmar"
+        (click)="devolver()"
+        [disabled]="!emprestimoEncontrado">
+        Confirmar Devolução
+      </button>
+
     </div>
-</div>
 
-@if (erro) {
-<div class="erro-msg">{{ erro }}</div>
-}
-
-<div class="actions">
-  <button type="button" class="btn-cancelar" (click)="cancelar()">
-    Cancelar
-  </button>
-  <button type="button" class="btn-confirmar" (click)="devolver()">
-    Confirmar Devolução
-  </button>
-</div>
-
-</form>
-
-</div>
+  </form>
 
 </div>
