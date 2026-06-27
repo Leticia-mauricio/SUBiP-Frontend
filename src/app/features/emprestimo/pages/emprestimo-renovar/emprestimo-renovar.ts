@@ -13,6 +13,7 @@ import { ExemplarService } from '../../../exemplar/services/exemplar.service';
 import { LivroService } from '../../../livro/services/livro.service';
 import { PessoaService } from '../../../pessoa/services/pessoa.service';
 import { BibliotecaService } from '../../../biblioteca/services/biblioteca.service';
+import { SituacaoEmprestimo } from '../../models/situacao-emprestimo';
 
 @Component({
   selector: 'app-emprestimo-renovar',
@@ -128,6 +129,7 @@ export class EmprestimoRenovar implements OnInit {
     this.atrasado = this.diasAtraso > 0;
 
     this.emprestimoEncontrado = true;
+    this.erro = '';
 
     const novaData = new Date(emprestimo.dataDevolucaoPrevista);
     novaData.setDate(novaData.getDate() + 15);
