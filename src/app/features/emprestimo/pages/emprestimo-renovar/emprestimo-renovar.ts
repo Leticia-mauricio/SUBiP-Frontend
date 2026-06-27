@@ -82,7 +82,15 @@ export class EmprestimoRenovar implements OnInit {
     );
 
     if (!exemplar) {
+
+      this.emprestimoEncontrado = false;
+
+      this.tituloLivro = '';
+      this.nomeLeitor = '';
+      this.nomeBiblioteca = '';
+
       this.erro = 'Tombo não encontrado.';
+
       return;
     }
 
@@ -93,7 +101,15 @@ export class EmprestimoRenovar implements OnInit {
     );
 
     if (!emprestimo) {
+
+      this.emprestimoEncontrado = false;
+
+      this.tituloLivro = '';
+      this.nomeLeitor = '';
+      this.nomeBiblioteca = '';
+
       this.erro = 'Não existe empréstimo ativo para esse exemplar.';
+
       return;
     }
 
