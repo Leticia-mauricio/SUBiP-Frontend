@@ -57,19 +57,19 @@ export class EmprestimoAdicionar implements OnInit {
 
   ngOnInit(): void {
 
-  this.pessoaService.listar().subscribe({
-    next: pessoas => this.leitores = pessoas
-  });
+    this.pessoaService.listar().subscribe({
+      next: pessoas => this.leitores = pessoas
+    });
 
-  this.exemplarService.listar().subscribe({
-    next: exemplares => this.exemplares = exemplares
-  });
+    this.exemplarService.listar().subscribe({
+      next: exemplares => this.exemplares = exemplares
+    });
 
-  this.livroService.listar().subscribe({
-    next: livros => this.livros = livros
-  });
+    this.livroService.listar().subscribe({
+      next: livros => this.livros = livros
+    });
 
-}
+  }
 
   buscarLeitor(): void {
 
@@ -85,6 +85,32 @@ export class EmprestimoAdicionar implements OnInit {
       this.nomeLeitor = '';
       this.emprestimo.pessoaId = 0;
       this.erro = 'Leitor não encontrado.';
+    }
+
+  }
+
+  buscarExemplar(): void {
+
+    const exemplar = this.exemplares.find(
+      e => e.tombo === this.tombo
+    );
+
+    if (exemplar) {
+
+      this.emprestimo.exemplarId = exemplar.id!;
+
+      const livro = this.livros.find(
+        l => l.id === exemplar.idLivro
+      );
+
+      this.tituloLivro = livro ? livro.titulo : '';
+
+    } else {
+
+      this.emprestimo.exemplarId = 0;
+      this.tituloLivro = '';
+
+      this.erro = 'Exemplar não encontrado.';
     }
 
   }
