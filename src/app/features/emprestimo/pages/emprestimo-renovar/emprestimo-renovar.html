@@ -1,54 +1,104 @@
 <div class="emprestimo-container">
 
   <div class="page-header">
-    <span class="breadcrumb">Empréstimos > Renovar Empréstimo</span>
-    <h1>Renovar Empréstimo</h1>
-    <p>Informe o ID do empréstimo e a nova data prevista de devolução.</p>
+    <span class="breadcrumb">
+      Empréstimos > Novo Empréstimo
+    </span>
+
+    <h1>Registrar Novo Empréstimo</h1>
+
+    <p>
+      Preencha as informações abaixo para registrar o empréstimo.
+    </p>
   </div>
 
   <form class="emprestimo-form">
 
     <div class="card">
-      <h3>📚 Identificação do Empréstimo</h3>
+      <h3>📚 Identificação do Exemplar</h3>
 
       <div class="form-group">
-        <label for="emprestimoId">ID do Empréstimo</label>
-        <input
-          id="emprestimoId"
-          type="number"
-          placeholder="Ex.: 1"
-          [(ngModel)]="emprestimoId"
-          name="emprestimoId"
-          min="1"
-        />
+        <label for="tombo">Tombo do Exemplar</label>
+
+        <input id="tombo" type="text" name="tombo" placeholder="Ex.: TOMBO-001" [(ngModel)]="tombo"
+          (ngModelChange)="buscarExemplar()" />
       </div>
 
+      @if (tituloLivro) {
+      <div class="info-box">
+        <div class="info-item">
+          <span class="label">Livro</span>
+          <span class="value">{{ tituloLivro }}</span>
+        </div>
+      </div>
+      }
+
+    </div>
+
+    <div class="card">
+      <h3>👤 Identificação do Leitor</h3>
+
       <div class="form-group">
-        <label for="novaData">Nova Data Prevista de Devolução</label>
-        <input
-          id="novaData"
-          type="date"
-          [(ngModel)]="renovacao.dataDevolucaoPrevista"
-          name="novaData"
-        />
+        <label for="cpf">CPF do Leitor</label>
+
+        <input id="cpf" type="text" name="cpf" placeholder="000.000.000-00" [(ngModel)]="cpf"
+          (ngModelChange)="buscarLeitor()" />
+      </div>
+
+      @if (nomeLeitor) {
+      <div class="info-box">
+        <div class="info-item">
+          <span class="label">Leitor</span>
+          <span class="value">{{ nomeLeitor }}</span>
+        </div>
+      </div>
+      }
+
+    </div>
+
+    <div class="card">
+      <h3>ℹ️ Informações do Empréstimo</h3>
+
+      <div class="info-box">
+
+        <div class="info-item">
+          <span class="label">Data de Retirada</span>
+          <span class="value">
+            {{ hoje }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Nova Data Prevista</span>
+          <span class="value destaque">
+            {{ novaDataPrevista }}
+          </span>
+        </div>
+
       </div>
 
       <p class="observacao">
-        A nova data deve ser posterior à data prevista atual do empréstimo.
+        Prazo padrão de 15 dias corridos.
       </p>
+
     </div>
 
     @if (erro) {
-      <div class="erro-msg">{{ erro }}</div>
+    <div class="erro-msg">
+      {{ erro }}
+    </div>
     }
 
     <div class="actions">
+
       <button type="button" class="btn-cancelar" (click)="cancelar()">
         Cancelar
       </button>
-      <button type="button" class="btn-confirmar" (click)="renovar()">
-        Confirmar Renovação
+
+      <button type="button" class="btn-confirmar" (click)="salvar()">
+        Confirmar Empréstimo
       </button>
+
     </div>
 
   </form>
