@@ -26,9 +26,9 @@
     @for (emprestimo of emprestimos; track emprestimo.id) {
       <tr>
         <td>{{ emprestimo.id }}</td>
-        <td>{{ emprestimo.tituloLivro }}</td>
+        <!--<td>{{ emprestimo.titulo }}</td>-->
         <td>{{ emprestimo.pessoaNome }}</td>
-        <td>{{ emprestimo.tombo }}</td>
+        <td>{{ emprestimo.exemplarId }}</td>
         <td>{{ emprestimo.dataRetirada }}</td>
         <td>{{ emprestimo.dataDevolucaoPrevista }}</td>
         <td>{{ emprestimo.situacao }}</td>
