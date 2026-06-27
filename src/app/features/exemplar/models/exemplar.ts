@@ -4,6 +4,6 @@ export interface Exemplar {
     id?: number,
     tombo: string,
     situacao: SituacaoExemplar,
-    idLivro: Number,
+    idLivro: number,
     idBiblioteca: number
 }
