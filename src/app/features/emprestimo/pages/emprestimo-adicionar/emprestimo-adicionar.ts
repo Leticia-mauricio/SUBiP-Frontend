@@ -100,7 +100,7 @@ export class EmprestimoAdicionar implements OnInit {
       this.emprestimo.exemplarId = exemplar.id!;
 
       const livro = this.livros.find(
-        l => l.id === exemplar.idLivro
+        l => l.id === exemplar.livroId
       );
 
       this.tituloLivro = livro ? livro.titulo : '';

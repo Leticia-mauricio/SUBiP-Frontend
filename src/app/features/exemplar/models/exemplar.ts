@@ -4,6 +4,6 @@ export interface Exemplar {
     id?: number;
     tombo: string;
     situacao: SituacaoExemplar;
-    livroId: number;       // era idLivro
-    bibliotecaId: number;  // era idBiblioteca
+    livroId: number;      
+    bibliotecaId: number;  
 }

@@ -116,12 +116,12 @@ export class EmprestimoRenovar implements OnInit {
 
     this.emprestimoId = emprestimo.id!;
 
-    const livro = this.livros.find(l => l.id === exemplar.idLivro);
+    const livro = this.livros.find(l => l.id === exemplar.livroId);
 
     const pessoa = this.pessoas.find(p => p.id === emprestimo.pessoaId);
 
     const biblioteca = this.bibliotecas.find(
-      b => b.id === exemplar.idBiblioteca
+      b => b.id === exemplar.bibliotecaId
     );
 
     this.tituloLivro = livro?.titulo ?? '';

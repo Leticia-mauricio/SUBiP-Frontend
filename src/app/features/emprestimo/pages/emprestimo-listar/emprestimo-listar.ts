@@ -59,9 +59,9 @@ export class EmprestimoListar implements OnInit {
 
       this.lista = emprestimos.map(emp => {
         const exemplar = exemplares.find(e => e.id === emp.exemplarId);
-        const livro = livros.find(l => l.id === exemplar?.idLivro);
+        const livro = livros.find(l => l.id === exemplar?.livroId);
         const pessoa = pessoas.find(p => p.id === emp.pessoaId);
-        const biblioteca = bibliotecas.find(b => b.id === exemplar?.idBiblioteca);
+        const biblioteca = bibliotecas.find(b => b.id === exemplar?.bibliotecaId);
 
         return {
           id: emp.id!,
@@ -69,7 +69,7 @@ export class EmprestimoListar implements OnInit {
           tombo: exemplar?.tombo ?? 'Sem tombo',
           pessoaNome: pessoa?.nome ?? 'Pessoa não encontrada',
           bibliotecaNome: biblioteca?.nome ?? 'Sem biblioteca',
-          bibliotecaId: exemplar?.idBiblioteca ?? null,
+          bibliotecaId: exemplar?.bibliotecaId ?? null,
           situacao: emp.situacao,
           dataRetirada: emp.dataRetirada,
           dataDevolucaoPrevista: emp.dataDevolucaoPrevista
