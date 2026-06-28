@@ -140,6 +140,10 @@ export class EmprestimoAdicionar implements OnInit {
       this.erro = this.avisoExemplar;
       return;
     }
+    if (this.avisoLeitor) {
+      this.erro = this.avisoLeitor;
+      return;
+    }
     this.erro = '';
     this.mostrarConfirmacao = true;
   }
