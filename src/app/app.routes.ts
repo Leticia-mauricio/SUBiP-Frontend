@@ -35,6 +35,7 @@ import { AtendenteListar } from './features/usuario/pages/atendente-listar/atend
 import { AtendenteAdicionar } from './features/usuario/pages/atendente-adicionar/atendente-adicionar';
 import { AtendenteAlterar } from './features/usuario/pages/atendente-alterar/atendente-alterar';
 import { AtendenteExcluir } from './features/usuario/pages/atendente-excluir/atendente-excluir';
+import { LeitorConsultar } from './features/usuario/pages/leitor-consultar/leitor-consultar';
 
 
 export const routes: Routes = [
@@ -85,15 +86,6 @@ export const routes: Routes = [
                         ]
                     },
                     {
-                        path: 'pessoas',
-                        children: [
-                            { path: '', component: PessoaListar },
-                            { path: 'adicionar', component: PessoaAdicionar },
-                            { path: 'excluir/:id', component: PessoaExcluir },
-                            { path: 'alterar/:id', component: PessoaAlterar }
-                        ]
-                    },
-                    {
                         path: 'emprestimos',
                         children: [
                             { path: '', component: EmprestimoListar },
@@ -119,7 +111,8 @@ export const routes: Routes = [
                             { path: 'alterar/:id', component: AtendenteAlterar },
                             { path: 'excluir/:id', component: AtendenteExcluir }
                         ]
-                    }
+                    }, 
+                    { path: 'leitores', component: LeitorConsultar }
                 ]
             }
         ]
