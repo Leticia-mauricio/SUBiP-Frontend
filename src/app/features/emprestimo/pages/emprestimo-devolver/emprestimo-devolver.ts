@@ -90,6 +90,9 @@ export class EmprestimoDevolver implements OnInit {
       return;
     }
 
+    console.log('emprestimos:', this.emprestimos);
+    console.log('exemplar.id:', exemplar.id);
+
     const emprestimo = this.emprestimos.find(
       e => e.exemplarId === exemplar.id &&
         e.situacao !== SituacaoEmprestimo.DEVOLVIDO
