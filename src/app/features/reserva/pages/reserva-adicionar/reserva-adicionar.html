@@ -14,6 +14,9 @@
     </div>
     <div class="acoes">
       <button class="btn" (click)="buscarExemplar()">Buscar</button>
+      <p *ngIf="exemplaresFiltrados.length === 0 && filtroTombo && exemplarSelecionado === null" class="erro">
+        Nenhum exemplar emprestado encontrado com esse tombo.
+      </p>
     </div>
 
     <table *ngIf="exemplaresFiltrados.length > 0">
@@ -36,9 +39,9 @@
     </table>
 
     @if (exemplarSelecionado) {
-      <div class="detalhe">
-        <p><strong>Exemplar selecionado:</strong> {{ exemplarSelecionado.tombo }}</p>
-      </div>
+    <div class="detalhe">
+      <p><strong>Exemplar selecionado:</strong> {{ exemplarSelecionado.tombo }}</p>
+    </div>
     }
 
     <hr style="margin: 20px 0">
@@ -56,6 +59,10 @@
     </div>
     <div class="acoes">
       <button class="btn" (click)="buscarPessoa()">Buscar</button>
+      <p *ngIf="pessoasFiltradas.length === 0 && (filtroPessoa.nome || filtroPessoa.cpf) && pessoaSelecionada === null"
+        class="erro">
+        Nenhum leitor encontrado com essas informações.
+      </p>
     </div>
 
     <table *ngIf="pessoasFiltradas.length > 0">
@@ -78,13 +85,13 @@
     </table>
 
     @if (pessoaSelecionada) {
-      <div class="detalhe">
-        <p><strong>Leitor selecionado:</strong> {{ pessoaSelecionada.nome }} — {{ pessoaSelecionada.cpf }}</p>
-      </div>
+    <div class="detalhe">
+      <p><strong>Leitor selecionado:</strong> {{ pessoaSelecionada.nome }} — {{ pessoaSelecionada.cpf }}</p>
+    </div>
     }
 
     @if (erro) {
-      <p class="erro">{{ erro }}</p>
+    <p class="erro">{{ erro }}</p>
     }
 
     <div class="acoes">
