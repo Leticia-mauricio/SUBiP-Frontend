@@ -28,9 +28,12 @@
       <div class="info-box">
         <div class="info-item">
           <span class="label">Livro</span>
-          <span class="value">{{ tituloLivro }}</span>
+          <span class="value">{{ tituloLivro }} — {{ nomeBiblioteca }}</span>
         </div>
       </div>
+      }
+      @if (exemplarNaoEncontrado) {
+      <p class="erro">Exemplar não encontrado.</p>
       }
 
     </div>
@@ -41,7 +44,8 @@
       <div class="form-group">
         <label for="cpf">CPF do Leitor</label>
 
-        <input id="cpf" type="text" name="cpf" placeholder="000.000.000-00" [(ngModel)]="cpf" (ngModelChange)="buscarLeitor()" />
+        <input id="cpf" type="text" name="cpf" placeholder="000.000.000-00" [(ngModel)]="cpf"
+          (ngModelChange)="buscarLeitor()" />
       </div>
 
       @if (nomeLeitor) {
@@ -99,6 +103,26 @@
       </button>
 
     </div>
+
+    @if (mostrarConfirmacao) {
+    <div class="modal-overlay">
+      <div class="card modal">
+        <h3>Confirmar Empréstimo</h3>
+        <div class="detalhe">
+          <p><strong>Livro:</strong> {{ tituloLivro }}</p>
+          <p><strong>Tombo:</strong> {{ tombo }}</p>
+          <p><strong>Biblioteca:</strong> {{ nomeBiblioteca }}</p>
+          <p><strong>Leitor:</strong> {{ nomeLeitor }}</p>
+          <p><strong>Data de Retirada:</strong> {{ hoje }}</p>
+          <p><strong>Previsão de Devolução:</strong> {{ dataDevolucaoPrevista }}</p>
+        </div>
+        <div class="acoes">
+          <button class="btn secundario" (click)="mostrarConfirmacao = false">Voltar</button>
+          <button class="btn" (click)="confirmar()">Confirmar</button>
+        </div>
+      </div>
+    </div>
+    }
 
   </form>
 

@@ -12,10 +12,11 @@ import { ExemplarService } from '../../../exemplar/services/exemplar.service';
 import { LivroService } from '../../../livro/services/livro.service';
 import { Biblioteca } from '../../../biblioteca/models/biblioteca';
 import { BibliotecaService } from '../../../biblioteca/services/biblioteca.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-emprestimo-adicionar',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './emprestimo-adicionar.html',
   styleUrl: './emprestimo-adicionar.css',
 })
@@ -120,22 +121,29 @@ export class EmprestimoAdicionar implements OnInit {
     }
   }
 
+  mostrarConfirmacao = false;
+
   salvar(): void {
+    if (!this.emprestimo.exemplarId || !this.emprestimo.pessoaId) {
+      this.erro = 'Preencha todos os campos antes de confirmar.';
+      return;
+    }
     this.erro = '';
+    this.mostrarConfirmacao = true; // abre o modal
+  }
 
+  confirmar(): void {
+    this.mostrarConfirmacao = false;
     this.emprestimo.dataRetirada = new Date().toISOString().split('T')[0];
-
     this.emprestimoService.salvar(this.emprestimo).subscribe({
-      next: () => {
-        this.router.navigate(['/gerenciar/emprestimos']);
-      },
-      error: (erro) => {
-        this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.';
-      }
+      next: () => this.router.navigate(['/gerenciar/emprestimos']),
+      error: (erro) => this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.'
     });
   }
 
   cancelar(): void {
     this.router.navigate(['/gerenciar/emprestimos']);
   }
+
+
 }
