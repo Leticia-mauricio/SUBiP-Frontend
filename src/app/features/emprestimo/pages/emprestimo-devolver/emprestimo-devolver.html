@@ -23,7 +23,7 @@
         <label for="tombo">Tombo do Exemplar</label>
 
         <input id="tombo" type="text" name="tombo" placeholder="Ex.: TOMBO-0001" [(ngModel)]="tombo"
-          (blur)="buscarExemplar()" />
+          (ngModelChange)="buscarExemplar()" />
 
       </div>
 
