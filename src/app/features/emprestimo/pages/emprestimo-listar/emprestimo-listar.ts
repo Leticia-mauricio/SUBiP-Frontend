@@ -33,6 +33,7 @@ export class EmprestimoListar implements OnInit {
 
   listaFiltrada = [...this.lista];
   bibliotecas: Biblioteca[] = [];
+  situacoes = Object.values(SituacaoEmprestimo);
 
   filtro = { tombo: '', titulo: '', pessoa: '', situacao: '', bibliotecaId: null as number | null };
 

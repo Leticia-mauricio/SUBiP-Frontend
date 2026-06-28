@@ -45,11 +45,13 @@
         <label>Situação</label>
         <select [(ngModel)]="filtro.situacao">
           <option value="">Todas</option>
-          <option value="EM_ANDAMENTO">Em andamento</option>
-          <option value="ATRASADO">Atrasado</option>
-          <option value="DEVOLVIDO">Devolvido</option>
+          <option *ngFor="let s of situacoes" [value]="s">
+            {{ s | titlecase }}
+          </option>
         </select>
       </div>
+
+
 
     </div>
 
