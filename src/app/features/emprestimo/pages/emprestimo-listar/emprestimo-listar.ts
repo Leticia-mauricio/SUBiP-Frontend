@@ -6,6 +6,7 @@ import { EmprestimoService } from '../../services/emprestimo.service';
 import { BibliotecaService } from '../../../biblioteca/services/biblioteca.service';
 import { Biblioteca } from '../../../biblioteca/models/biblioteca';
 import { SituacaoEmprestimo } from '../../models/situacao-emprestimo';
+import { PessoaService } from '../../../pessoa/services/pessoa.service';
 
 @Component({
   selector: 'app-emprestimo-listar',
@@ -23,17 +24,25 @@ export class EmprestimoListar implements OnInit {
 
   constructor(
     private emprestimoService: EmprestimoService,
-    private bibliotecaService: BibliotecaService
-  ) {}
+    private bibliotecaService: BibliotecaService,
+    private pessoaService: PessoaService
+  ) { }
 
   ngOnInit(): void {
     forkJoin({
       emprestimos: this.emprestimoService.listar(),
+      pessoas: this.pessoaService.listar(),
       bibliotecas: this.bibliotecaService.listar()
-    }).subscribe(({ emprestimos, bibliotecas }) => {
-      this.lista = emprestimos;
-      this.listaFiltrada = [...emprestimos];
+    }).subscribe(({ emprestimos, pessoas, bibliotecas }) => {
       this.bibliotecas = bibliotecas;
+      this.lista = emprestimos.map(emp => {
+        const pessoa = pessoas.find(p => p.id === emp.pessoaId);
+        return {
+          ...emp,
+          pessoaCpf: pessoa?.cpf ?? ''
+        };
+      });
+      this.listaFiltrada = [...this.lista];
     });
   }
 
