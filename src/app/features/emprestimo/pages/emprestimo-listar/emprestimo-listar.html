@@ -17,6 +17,10 @@
         <input [(ngModel)]="filtro.pessoa" placeholder="Nome do leitor">
       </div>
       <div class="campo">
+        <label>CPF</label>
+        <input [(ngModel)]="filtro.cpf" placeholder="000.000.000-00">
+      </div>
+      <div class="campo">
         <label>Biblioteca</label>
         <select [(ngModel)]="filtro.bibliotecaId">
           <option [ngValue]="null">Todas</option>
@@ -52,6 +56,7 @@
           <th>Livro</th>
           <th>Tombo</th>
           <th>Leitor</th>
+          <th>CPF</th>
           <th>Biblioteca</th>
           <th>Retirada</th>
           <th>Previsão</th>
@@ -63,6 +68,7 @@
           <td>{{ e.titulo }}</td>
           <td>{{ e.tombo }}</td>
           <td>{{ e.pessoaNome }}</td>
+          <td>{{ e.pessoaCpf }}</td>
           <td>{{ e.bibliotecaNome }}</td>
           <td>{{ e.dataRetirada | date:'dd/MM/yyyy' }}</td>
           <td>{{ e.dataDevolucaoPrevista | date:'dd/MM/yyyy' }}</td>

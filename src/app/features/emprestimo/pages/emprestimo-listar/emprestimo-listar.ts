@@ -27,7 +27,8 @@ export class EmprestimoListar implements OnInit {
     titulo: string;
     tombo: string;
     pessoaNome: string;
-    bibliotecaNome: string;       
+    pessoaCpf: string;
+    bibliotecaNome: string;
     bibliotecaId: number | null;
     situacao: SituacaoEmprestimo;
     dataRetirada: string;
@@ -38,7 +39,7 @@ export class EmprestimoListar implements OnInit {
   bibliotecas: Biblioteca[] = [];
   situacoes = Object.values(SituacaoEmprestimo);
 
-  filtro = { tombo: '', titulo: '', pessoa: '', situacao: '', bibliotecaId: null as number | null };
+  filtro = { tombo: '', titulo: '', pessoa: '', cpf: '', situacao: '', bibliotecaId: null as number | null };
 
   constructor(
     private emprestimoService: EmprestimoService,
@@ -71,6 +72,7 @@ export class EmprestimoListar implements OnInit {
           titulo: livro?.titulo ?? 'Livro não encontrado',
           tombo: exemplar?.tombo ?? 'Sem tombo',
           pessoaNome: pessoa?.nome ?? 'Pessoa não encontrada',
+          pessoaCpf: pessoa?.cpf ?? 'CPF não encontrado',
           bibliotecaNome: biblioteca?.nome ?? 'Sem biblioteca',
           bibliotecaId: exemplar?.bibliotecaId ?? null,
           situacao: emp.situacao,
@@ -92,8 +94,8 @@ export class EmprestimoListar implements OnInit {
       if (this.filtro.pessoa &&
         !e.pessoaNome.toLowerCase().includes(this.filtro.pessoa.toLowerCase())) return false;
       if (this.filtro.situacao && e.situacao !== this.filtro.situacao) return false;
-
-      // filtro novo
+      if (this.filtro.cpf &&
+        !e.pessoaCpf.toLowerCase().includes(this.filtro.cpf.toLowerCase())) return false;
       if (this.filtro.bibliotecaId && e.bibliotecaId !== this.filtro.bibliotecaId) return false;
 
       return true;
@@ -101,7 +103,7 @@ export class EmprestimoListar implements OnInit {
   }
 
   limpar(): void {
-    this.filtro = { tombo: '', titulo: '', pessoa: '', situacao: '', bibliotecaId: null };
+    this.filtro = { tombo: '', titulo: '', pessoa: '', cpf: '', situacao: '', bibliotecaId: null };
     this.listaFiltrada = [...this.lista];
   }
 
