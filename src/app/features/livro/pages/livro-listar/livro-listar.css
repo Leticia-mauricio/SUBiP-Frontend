@@ -106,3 +106,23 @@ th {
   color: #2e7d32;
   font-weight: bold;
 }
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.btn.novo {
+  background-color: #c0392b;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.btn.novo:hover {
+  background-color: #a93226;
+}
