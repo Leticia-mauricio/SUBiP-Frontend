@@ -16,7 +16,7 @@
       </div>
       <div class="campo">
         <label>Biblioteca</label>
-        <select [(ngModel)]="exemplar.idBiblioteca">
+        <select [(ngModel)]="exemplar.bibliotecaId">
           <option [ngValue]="0" disabled>Selecione uma biblioteca</option>
           <option *ngFor="let b of bibliotecas" [ngValue]="b.id">{{ b.nome }}</option>
         </select>
