@@ -1,41 +1,77 @@
-<h2>Reservas</h2>
+<div class="container">
+  <div class="cabecalho">
+    <h2>Reservas</h2>
+    <a routerLink="/gerenciar/reservas/adicionar" class="btn novo">Nova Reserva</a>
+  </div>
 
-<a routerLink="/gerenciar/reservas/adicionar">
-  Nova Reserva
-</a>
+  <div class="card filtros">
+    <h3>Filtros de consulta</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Título do livro</label>
+        <input [(ngModel)]="filtro.titulo" placeholder="Nome do livro">
+      </div>
+      <div class="campo">
+        <label>Tombo</label>
+        <input [(ngModel)]="filtro.tombo" placeholder="Ex: TMB0001">
+      </div>
+      <div class="campo">
+        <label>Leitor</label>
+        <input [(ngModel)]="filtro.pessoa" placeholder="Nome do leitor">
+      </div>
+      <div class="campo">
+        <label>Biblioteca</label>
+        <select [(ngModel)]="filtro.bibliotecaId">
+          <option [ngValue]="null">Todas</option>
+          <option *ngFor="let b of bibliotecas" [ngValue]="b.id">{{ b.nome }}</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Situação</label>
+        <select [(ngModel)]="filtro.situacao">
+          <option value="">Todas</option>
+          <option *ngFor="let s of situacoes" [value]="s">{{ s | titlecase }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="acoes">
+      <button class="btn" (click)="pesquisar()">Pesquisar</button>
+      <button class="btn secundario" (click)="limpar()">Limpar</button>
+    </div>
+  </div>
 
-<br><br>
+  <div class="resumo">
+    <p><strong>{{ listaFiltrada.length }}</strong> reservas encontradas</p>
+  </div>
 
-<table border="1">
-
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Livro</th>
-      <th>Leitor</th>
-      <th>Tombo</th>
-      <th>Data Registro</th>
-      <th>Situação</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-
-  <tbody>
-
-    @for (reserva of reservas; track reserva.id) {
-      <tr>
-        <td>{{ reserva.id }}</td>
-        <td>{{ reserva.tituloLivro }}</td>
-        <td>{{ reserva.pessoaNome }}</td>
-        <td>{{ reserva.tombo }}</td>
-        <td>{{ reserva.dataRegistro }}</td>
-        <td>{{ reserva.situacao }}</td>
-        <td>
-          <a [routerLink]="['/gerenciar/reservas/excluir', reserva.id]">Cancelar</a>
-        </td>
-      </tr>
-    }
-
-  </tbody>
-
-</table>
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Livro</th>
+          <th>Tombo</th>
+          <th>Leitor</th>
+          <th>Biblioteca</th>
+          <th>Data Registro</th>
+          <th>Situação</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of listaFiltrada">
+          <td>{{ r.tituloLivro }}</td>
+          <td>{{ r.tombo }}</td>
+          <td>{{ r.pessoaNome }}</td>
+          <td>{{ r.biblioteca }}</td>
+          <td>{{ r.dataRegistro | date:'dd/MM/yyyy' }}</td>
+          <td><span [ngClass]="r.situacao">{{ r.situacao | titlecase }}</span></td>
+          <td>
+            <a *ngIf="r.situacao === 'ATIVA'"
+              [routerLink]="['/gerenciar/reservas/excluir', r.id]"
+              class="btn-acao perigo">Cancelar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
