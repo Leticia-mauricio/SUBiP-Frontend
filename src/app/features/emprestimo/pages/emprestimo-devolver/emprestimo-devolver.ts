@@ -15,6 +15,7 @@ import { LivroService } from '../../../livro/services/livro.service';
 import { PessoaService } from '../../../pessoa/services/pessoa.service';
 import { BibliotecaService } from '../../../biblioteca/services/biblioteca.service';
 import { SituacaoEmprestimo } from '../../models/situacao-emprestimo';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-emprestimo-devolver',
@@ -63,21 +64,22 @@ export class EmprestimoDevolver implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  this.devolucao.dataDevolucao = this.hoje;
 
-    //this.devolucao.dataDevolucao = new Date().toISOString().split('T')[0];
-    this.devolucao.dataDevolucao = this.hoje;
-
-    this.emprestimoService.listar().subscribe(e => this.emprestimos = e);
-
-    this.exemplarService.listar().subscribe(e => this.exemplares = e);
-
-    this.livroService.listar().subscribe(l => this.livros = l);
-
-    this.pessoaService.listar().subscribe(p => this.pessoas = p);
-
-    this.bibliotecaService.listar().subscribe(b => this.bibliotecas = b);
-
-  }
+  forkJoin({
+    emprestimos: this.emprestimoService.listar(),
+    exemplares: this.exemplarService.listar(),
+    livros: this.livroService.listar(),
+    pessoas: this.pessoaService.listar(),
+    bibliotecas: this.bibliotecaService.listar()
+  }).subscribe(({ emprestimos, exemplares, livros, pessoas, bibliotecas }) => {
+    this.emprestimos = emprestimos;
+    this.exemplares = exemplares;
+    this.livros = livros;
+    this.pessoas = pessoas;
+    this.bibliotecas = bibliotecas;
+  });
+}
 
   buscarExemplar(): void {
     this.emprestimoEncontrado = false;
