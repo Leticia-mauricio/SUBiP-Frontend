@@ -121,23 +121,4 @@
   </div>
   }
 
-  <div class="modal-overlay" *ngIf="mostrarConfirmacao">
-    <div class="card modal">
-      <h3>Confirmar Empréstimo</h3>
-      <div class="detalhe">
-        <p><strong>Livro:</strong> {{ tituloLivro }}</p>
-        <p><strong>Tombo:</strong> {{ tombo }}</p>
-        <p><strong>Biblioteca:</strong> {{ nomeBiblioteca }}</p>
-        <p><strong>Leitor:</strong> {{ nomeLeitor }}</p>
-        <p><strong>Data de Retirada:</strong> {{ hoje }}</p>
-        <p><strong>Previsão de Devolução:</strong> {{ dataDevolucaoPrevista }}</p>
-      </div>
-      <div class="acoes">
-        <button class="btn secundario" (click)="mostrarConfirmacao = false">Voltar</button>
-        <button class="btn" (click)="confirmar()">Confirmar</button>
-      </div>
-    </div>
-  </div>
-
-
 </div>
