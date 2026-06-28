@@ -1,55 +1,69 @@
-<h2>exemplares</h2>
+<div class="container">
+  <h2>Exemplares</h2>
 
-<a routerLink="/gerenciar/exemplares/adicionar">
-  Novo exemplar
-</a>
+  <div class="card filtros">
+    <h3>Filtros de consulta</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Tombo</label>
+        <input [(ngModel)]="filtro.tombo" placeholder="Ex: TMB0001">
+      </div>
+      <div class="campo">
+        <label>Livro</label>
+        <select [(ngModel)]="filtro.livroId">
+          <option [ngValue]="null">Todos</option>
+          <option *ngFor="let l of livros" [ngValue]="l.id">{{ l.titulo }}</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Biblioteca</label>
+        <select [(ngModel)]="filtro.bibliotecaId">
+          <option [ngValue]="null">Todas</option>
+          <option *ngFor="let b of bibliotecas" [ngValue]="b.id">{{ b.nome }}</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Situação</label>
+        <select [(ngModel)]="filtro.situacao">
+          <option value="">Todas</option>
+          <option *ngFor="let s of situacoes" [value]="s">{{ s | titlecase }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="acoes">
+      <button class="btn" (click)="pesquisar()">Pesquisar</button>
+      <button class="btn secundario" (click)="limpar()">Limpar</button>
+      <a routerLink="/gerenciar/exemplares/adicionar" class="btn">Novo Exemplar</a>
+    </div>
+  </div>
 
-<br><br>
+  <div class="resumo">
+    <p><strong>{{ listaFiltrada.length }}</strong> exemplares encontrados</p>
+  </div>
 
-<table border="1">
-
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-
-  <tbody>
-
-    <tr *ngFor="let exemplar of exemplares">
-
-      <td>{{ exemplar.id }}</td>
-
-      <td>{{ exemplar.tombo }}</td>
-
-      <td>
-
-        <a
-          [routerLink]="[
-            '/gerenciar/exemplares/alterar',
-            exemplar.id
-          ]"
-        >
-          Editar
-        </a>
-
-        |
-
-        <a
-          [routerLink]="[
-            '/gerenciar/exemplares/excluir',
-            exemplar.id
-          ]"
-        >
-          Excluir
-        </a>
-
-      </td>
-
-    </tr>
-
-  </tbody>
-
-</table>
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Tombo</th>
+          <th>Livro</th>
+          <th>Biblioteca</th>
+          <th>Situação</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of listaFiltrada">
+          <td>{{ e.tombo }}</td>
+          <td>{{ e.tituloLivro }}</td>
+          <td>{{ e.nomeBiblioteca }}</td>
+          <td><span [ngClass]="e.situacao">{{ e.situacao | titlecase }}</span></td>
+          <td>
+            <a [routerLink]="['/gerenciar/exemplares/alterar', e.id]" class="btn-acao">Editar</a>
+            <a [routerLink]="['/gerenciar/exemplares/excluir', e.id]" class="btn-acao perigo">Excluir</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

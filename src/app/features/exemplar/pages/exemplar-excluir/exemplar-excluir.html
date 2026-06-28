@@ -1,16 +1,23 @@
-<h2>Excluir exemplar</h2>
+<div class="container">
+  <h2>Excluir Exemplar</h2>
 
-<p>Deseja realmente excluir o exemplar?</p>
+  <div class="card">
+    <p class="aviso">
+      ⚠️ Atenção: excluir este exemplar pode afetar empréstimos e reservas vinculados a ele.
+    </p>
+    <p>Deseja realmente excluir o exemplar abaixo?</p>
+    <div class="detalhe">
+      <p><strong>Tombo:</strong> {{ exemplar.tombo }}</p>
+      <p><strong>Situação:</strong> {{ exemplar.situacao | titlecase }}</p>
+    </div>
 
-<p>
-  <strong>{{ exemplar.tombo }}</strong>
-</p>
+    @if (erro) {
+      <p class="erro">{{ erro }}</p>
+    }
 
-@if (erro) {
-  <p style="color:red">{{ erro }}</p>
-}
-
-<button type="button" (click)="cancelar()" style="margin-right:8px">Cancelar</button>
-<button type="button" (click)="excluir()">
-  Excluir
-</button>
+    <div class="acoes">
+      <button class="btn secundario" (click)="cancelar()">Cancelar</button>
+      <button class="btn perigo" (click)="excluir()">Excluir</button>
+    </div>
+  </div>
+</div>

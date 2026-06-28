@@ -1,56 +1,63 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { forkJoin } from 'rxjs';
 import { Exemplar } from '../../models/exemplar';
-import { ExemplarService } from '../../services/exemplar.service';
+import { Livro } from '../../../livro/models/livro';
+import { Biblioteca } from '../../../biblioteca/models/biblioteca';
 import { SituacaoExemplar } from '../../models/situacao-exemplar';
+import { ExemplarService } from '../../services/exemplar.service';
+import { LivroService } from '../../../livro/services/livro.service';
+import { BibliotecaService } from '../../../biblioteca/services/biblioteca.service';
 
 @Component({
-  selector: 'app-Exemplar-alterar',
-  imports: [FormsModule],
-  templateUrl: './Exemplar-alterar.html',
-  styleUrl: './Exemplar-alterar.css',
+  selector: 'app-exemplar-alterar',
+  imports: [FormsModule, CommonModule],
+  templateUrl: './exemplar-alterar.html',
+  styleUrl: './exemplar-alterar.css',
 })
 export class ExemplarAlterar implements OnInit {
-
   exemplar: Exemplar = {
-    tombo: '', 
+    tombo: '',
     situacao: SituacaoExemplar.DISPONIVEL,
     idLivro: 0,
     idBiblioteca: 0
   };
-
+  livros: Livro[] = [];
+  bibliotecas: Biblioteca[] = [];
+  situacoes = Object.values(SituacaoExemplar);
   erro: string = '';
 
   constructor(
-    private ExemplarService: ExemplarService,
+    private exemplarService: ExemplarService,
+    private livroService: LivroService,
+    private bibliotecaService: BibliotecaService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.buscar();
-  }
-
-  buscar(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (!id) return;
-    this.ExemplarService.buscarPorId(id).subscribe({
-      next: (exemplar) => { this.exemplar = exemplar; },
-      error: (erro) => { console.error(erro); }
+    forkJoin({
+      exemplar: this.exemplarService.buscarPorId(id),
+      livros: this.livroService.listar(),
+      bibliotecas: this.bibliotecaService.listar()
+    }).subscribe({
+      next: ({ exemplar, livros, bibliotecas }) => {
+        this.exemplar = exemplar;
+        this.livros = livros;
+        this.bibliotecas = bibliotecas;
+      },
+      error: (erro) => console.error(erro)
     });
   }
 
   salvar(): void {
     this.erro = '';
-    this.ExemplarService.salvar(this.exemplar).subscribe({
-      next: () => {
-        this.router.navigate(['/gerenciar/exemplares']);
-      },
-      error: (erro) => {
-        this.erro = erro?.error?.message || 'Erro ao alterar exemplar.';
-      }
+    this.exemplarService.salvar(this.exemplar).subscribe({
+      next: () => this.router.navigate(['/gerenciar/exemplares']),
+      error: (erro) => this.erro = erro?.error?.message || 'Erro ao alterar exemplar.'
     });
   }
 

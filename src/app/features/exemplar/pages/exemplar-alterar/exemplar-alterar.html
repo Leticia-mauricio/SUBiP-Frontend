@@ -1,22 +1,41 @@
-<h2>Alterar Exemplar</h2>
+<div class="container">
+  <h2>Alterar Exemplar</h2>
 
-<label for="tombo">
-  Tombo
-</label>
+  <div class="card">
+    <div class="grid">
+      <div class="campo">
+        <label>Tombo</label>
+        <input type="text" [(ngModel)]="exemplar.tombo" placeholder="Ex: TMB0001">
+      </div>
+      <div class="campo">
+        <label>Livro</label>
+        <select [(ngModel)]="exemplar.idLivro">
+          <option [ngValue]="0" disabled>Selecione um livro</option>
+          <option *ngFor="let l of livros" [ngValue]="l.id">{{ l.titulo }}</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Biblioteca</label>
+        <select [(ngModel)]="exemplar.idBiblioteca">
+          <option [ngValue]="0" disabled>Selecione uma biblioteca</option>
+          <option *ngFor="let b of bibliotecas" [ngValue]="b.id">{{ b.nome }}</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Situação</label>
+        <select [(ngModel)]="exemplar.situacao">
+          <option *ngFor="let s of situacoes" [value]="s">{{ s | titlecase }}</option>
+        </select>
+      </div>
+    </div>
 
-<input
-  id="tombo"
-  type="text"
-  [(ngModel)]="exemplar.tombo"
-/>
+    @if (erro) {
+      <p class="erro">{{ erro }}</p>
+    }
 
-<br><br>
-
-@if (erro) {
-  <p style="color:red">{{ erro }}</p>
-}
-
-<button type="button" (click)="cancelar()" style="margin-right:8px">Cancelar</button>
-<button type="button" (click)="salvar()">
-  Atualizar
-</button>
+    <div class="acoes">
+      <button class="btn secundario" (click)="cancelar()">Cancelar</button>
+      <button class="btn" (click)="salvar()">Atualizar</button>
+    </div>
+  </div>
+</div>
