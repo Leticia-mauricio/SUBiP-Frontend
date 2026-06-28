@@ -34,7 +34,7 @@ export class LivroExcluir implements OnInit {
     if (!id) return;
     this.livroService.excluir(id).subscribe({
       next: () => this.router.navigate(['/gerenciar/livros']),
-      error: (erro) => this.erro = erro?.error?.message || 'Erro ao excluir livro.'
+      error: (erro) => this.erro = erro?.error?.message || 'Erro ao excluir livro. Não é possível excluir um livro vinculado a um exemplar.'
     });
   }
 
