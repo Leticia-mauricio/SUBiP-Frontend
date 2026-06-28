@@ -18,13 +18,16 @@ export class ReservaCancelar implements OnInit {
     private reservaService: ReservaService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (!id) return;
     this.reservaService.buscarPorId(id).subscribe({
-      next: (reserva) => { this.reserva = reserva; },
+      next: (reserva) => {
+        console.log(reserva); // adicionar aqui
+        this.reserva = reserva;
+      },
       error: (erro) => { console.error(erro); }
     });
   }
