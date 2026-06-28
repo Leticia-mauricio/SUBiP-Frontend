@@ -1,45 +1,105 @@
-<h2>Empréstimos</h2>
+<div class="container">
 
-<a routerLink="/gerenciar/emprestimos/adicionar">
-  Novo Empréstimo
-</a>
+  <h2>Consultar Empréstimos</h2>
 
-<br><br>
+  <!-- PAINEL DE FILTROS -->
+  <div class="card filtros">
 
-<table border="1">
+    <h3>Filtros de consulta</h3>
 
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Livro</th>
-      <th>Leitor</th>
-      <th>Tombo</th>
-      <th>Retirada</th>
-      <th>Devolução Prevista</th>
-      <th>Situação</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
+    <div class="grid">
 
-  <tbody>
+      <div class="campo">
+        <label>Tombo</label>
+        <input [(ngModel)]="filtro.tombo" placeholder="Ex: TMB0001">
+      </div>
 
-    @for (emprestimo of emprestimos; track emprestimo.id) {
-      <tr>
-        <td>{{ emprestimo.id }}</td>
-        <td>{{ emprestimo.titulo }}</td>
-        <td>{{ emprestimo.pessoaNome }}</td>
-        <td>{{ emprestimo.exemplarId }}</td>
-        <td>{{ emprestimo.dataRetirada }}</td>
-        <td>{{ emprestimo.dataDevolucaoPrevista }}</td>
-        <td>{{ emprestimo.situacao }}</td>
-        <td>
-          <a routerLink="/gerenciar/emprestimos/devolver">Devolver</a>
-          |
-          <a routerLink="/gerenciar/emprestimos/renovar">Renovar</a>
-        </td>
-      </tr>
-    }
+      <div class="campo">
+        <label>Título do livro</label>
+        <input [(ngModel)]="filtro.titulo" placeholder="Nome do livro">
+      </div>
 
-  </tbody>
+      <div class="campo">
+        <label>Nome do leitor</label>
+        <input [(ngModel)]="filtro.pessoa" placeholder="Nome do leitor">
+      </div>
 
-</table>
+      <div class="campo">
+        <label>CPF</label>
+        <input [(ngModel)]="filtro.cpf" placeholder="000.000.000-00">
+      </div>
+
+      <div class="campo">
+        <label>Biblioteca</label>
+        <input [(ngModel)]="filtro.biblioteca" placeholder="Biblioteca">
+      </div>
+
+      <div class="campo">
+        <label>Situação</label>
+        <select [(ngModel)]="filtro.situacao">
+          <option value="">Todas</option>
+          <option value="EM_ANDAMENTO">Em andamento</option>
+          <option value="ATRASADO">Atrasado</option>
+          <option value="DEVOLVIDO">Devolvido</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- BOTÕES -->
+    <div class="acoes">
+      <button class="btn" (click)="pesquisar()">Pesquisar</button>
+      <button class="btn secundario" (click)="limpar()">Limpar</button>
+      <button class="btn exportar" (click)="exportarCSV()">Exportar CSV</button>
+    </div>
+
+  </div>
+
+  <!-- RESUMO -->
+  <div class="resumo">
+    <p><strong>{{ emprestimosFiltrados.length }}</strong> empréstimos encontrados</p>
+  </div>
+
+  <!-- LISTA -->
+  <div class="card">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Livro</th>
+          <th>Tombo</th>
+          <th>Leitor</th>
+          <th>CPF</th>
+          <th>Biblioteca</th>
+          <th>Retirada</th>
+          <th>Previsão</th>
+          <th>Situação</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let e of emprestimosFiltrados">
+
+          <td>{{ e.titulo }}</td>
+          <td>{{ e.tombo }}</td>
+          <td>{{ e.pessoaNome }}</td>
+          <td>{{ e.pessoaCpf }}</td>
+          <td>{{ e.biblioteca }}</td>
+          <td>{{ e.dataRetirada | date:'dd/MM/yyyy' }}</td>
+          <td>{{ e.dataPrevista | date:'dd/MM/yyyy' }}</td>
+
+          <td>
+            <span [ngClass]="e.situacao">
+              {{ e.situacao }}
+            </span>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

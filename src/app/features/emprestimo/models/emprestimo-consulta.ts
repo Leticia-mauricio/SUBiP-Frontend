@@ -1,7 +1,16 @@
-import { EmprestimoListagem } from "./emprestimo-listagem";
+export interface EmprestimoConsulta {
+    id: number;
 
-export interface EmprestimoConsulta extends EmprestimoListagem {
-    tombo: string;
-    leitorCpf: string;
-    bibliotecaNome: string;
+  titulo: string;
+  tombo: string;
+
+  pessoaNome: string;
+  pessoaCpf: string;
+
+  biblioteca: string;
+
+  dataRetirada: string;
+  dataPrevista: string;
+
+  situacao: string;
 }
