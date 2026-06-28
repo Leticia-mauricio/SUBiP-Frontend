@@ -73,6 +73,7 @@
           <td>{{ e.biblioteca }}</td>
           <td>{{ e.dataRetirada | date:'dd/MM/yyyy' }}</td>
           <td>{{ e.dataDevolucaoPrevista | date:'dd/MM/yyyy' }}</td>
+          <td>{{ e.dataDevolucao ? (e.dataDevolucao | date:'dd/MM/yyyy') : '' }}</td>
           <td>
             <span [ngClass]="e.situacao">{{ e.situacao | titlecase }}</span>
           </td>
