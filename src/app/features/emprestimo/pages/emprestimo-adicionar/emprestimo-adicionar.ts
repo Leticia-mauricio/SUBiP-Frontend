@@ -82,22 +82,21 @@ export class EmprestimoAdicionar implements OnInit {
 
   }
 
-  buscarLeitor(): void {
+  avisoLeitor = '';
 
+  buscarLeitor(): void {
     const leitor = this.leitores.find(
       p => p.cpf.replace(/\D/g, '') === this.cpf.replace(/\D/g, '')
     );
-
     if (leitor) {
       this.nomeLeitor = leitor.nome;
       this.emprestimo.pessoaId = leitor.id!;
-      this.erro = '';
+      this.avisoLeitor = '';
     } else {
       this.nomeLeitor = '';
       this.emprestimo.pessoaId = 0;
-      this.erro = 'Leitor não encontrado.';
+      this.avisoLeitor = this.cpf.length > 0 ? 'Leitor não encontrado.' : '';
     }
-
   }
 
   exemplarNaoEncontrado = false;
@@ -133,14 +132,16 @@ export class EmprestimoAdicionar implements OnInit {
   mostrarConfirmacao = false;
 
   salvar(): void {
-    console.log('salvar chamado', this.mostrarConfirmacao);
     if (!this.emprestimo.exemplarId || !this.emprestimo.pessoaId) {
       this.erro = 'Preencha todos os campos antes de confirmar.';
       return;
     }
+    if (this.avisoExemplar) {
+      this.erro = this.avisoExemplar;
+      return;
+    }
     this.erro = '';
     this.mostrarConfirmacao = true;
-    console.log('mostrarConfirmacao', this.mostrarConfirmacao);
   }
 
   confirmar(): void {

@@ -38,23 +38,22 @@
 
     <div class="card">
       <h3>👤 Identificação do Leitor</h3>
-
       <div class="form-group">
         <label for="cpf">CPF do Leitor</label>
-
         <input id="cpf" type="text" name="cpf" placeholder="000.000.000-00" [(ngModel)]="cpf"
           (ngModelChange)="buscarLeitor()" />
       </div>
-
-
-      <div class="info-box" *ngIf="nomeLeitor">
+      @if (nomeLeitor) {
+      <div class="info-box">
         <div class="info-item">
           <span class="label">Leitor</span>
           <span class="value">{{ nomeLeitor }}</span>
         </div>
       </div>
-
-
+      }
+      @if (avisoLeitor) {
+      <p class="erro">{{ avisoLeitor }}</p>
+      }
     </div>
 
     <div class="card">
