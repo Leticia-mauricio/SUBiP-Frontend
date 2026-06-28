@@ -31,9 +31,9 @@
           <span class="value">{{ tituloLivro }} — {{ nomeBiblioteca }}</span>
         </div>
       </div>
+      @if (erro) {
+      <p class="erro">{{ avisoExemplar }}</p>
       }
-      @if (exemplarNaoEncontrado) {
-      <p class="erro">Exemplar não encontrado.</p>
       }
 
     </div>

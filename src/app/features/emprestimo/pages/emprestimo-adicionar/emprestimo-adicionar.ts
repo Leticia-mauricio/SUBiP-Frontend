@@ -102,6 +102,8 @@ export class EmprestimoAdicionar implements OnInit {
 
   exemplarNaoEncontrado = false;
 
+  avisoExemplar = '';
+
   buscarExemplar(): void {
     const exemplar = this.exemplares.find(e => e.tombo === this.tombo);
     if (exemplar) {
@@ -112,18 +114,19 @@ export class EmprestimoAdicionar implements OnInit {
       this.nomeBiblioteca = biblioteca ? biblioteca.nome : '';
       this.exemplarNaoEncontrado = false;
 
-      // aviso de exemplar não disponível
-      if (exemplar.situacao !== 'DISPONIVEL' && exemplar.situacao !== 'RESERVADO') {
-        this.erro = `Exemplar com situação ${exemplar.situacao} — pode não estar disponível para empréstimo.`;
+      if (exemplar.situacao === 'EMPRESTADO') {
+        this.avisoExemplar = 'Este exemplar já está emprestado.';
+      } else if (exemplar.situacao === 'INDISPONIVEL') {
+        this.avisoExemplar = 'Este exemplar está indisponível.';
       } else {
-        this.erro = '';
+        this.avisoExemplar = '';
       }
     } else {
       this.emprestimo.exemplarId = 0;
       this.tituloLivro = '';
       this.nomeBiblioteca = '';
+      this.avisoExemplar = '';
       this.exemplarNaoEncontrado = this.tombo.length > 0;
-      this.erro = '';
     }
   }
 
