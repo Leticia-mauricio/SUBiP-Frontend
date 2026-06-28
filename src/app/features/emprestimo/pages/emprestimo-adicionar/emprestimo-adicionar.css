@@ -130,3 +130,11 @@
   width: 400px;
   max-width: 90%;
 }
+
+.emprestimo-container {
+  position: relative;
+  z-index: 0;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
