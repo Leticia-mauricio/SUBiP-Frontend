@@ -1,5 +1,8 @@
-<div class="container">
-  <h2>Exemplares</h2>
+ <div class="container">
+    <div class="cabecalho">
+      <h2>Exemplares</h2>
+      <a routerLink="/gerenciar/exemplares/adicionar" class="btn novo">Novo Exemplar</a>
+    </div>
 
   <div class="card filtros">
     <h3>Filtros de consulta</h3>
@@ -33,7 +36,6 @@
     <div class="acoes">
       <button class="btn" (click)="pesquisar()">Pesquisar</button>
       <button class="btn secundario" (click)="limpar()">Limpar</button>
-      <a routerLink="/gerenciar/exemplares/adicionar" class="btn">Novo Exemplar</a>
     </div>
   </div>
 
