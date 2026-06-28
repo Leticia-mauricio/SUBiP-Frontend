@@ -10,6 +10,8 @@ import { Exemplar } from '../../../exemplar/models/exemplar';
 import { Livro } from '../../../livro/models/livro';
 import { ExemplarService } from '../../../exemplar/services/exemplar.service';
 import { LivroService } from '../../../livro/services/livro.service';
+import { Biblioteca } from '../../../biblioteca/models/biblioteca';
+import { BibliotecaService } from '../../../biblioteca/services/biblioteca.service';
 
 @Component({
   selector: 'app-emprestimo-adicionar',
@@ -38,6 +40,9 @@ export class EmprestimoAdicionar implements OnInit {
   tombo = '';
   tituloLivro = '';
 
+  bibliotecas: Biblioteca[] = [];
+  nomeBiblioteca = '';
+
   hoje = new Date().toLocaleDateString('pt-BR');
 
   get dataDevolucaoPrevista(): string {
@@ -51,6 +56,7 @@ export class EmprestimoAdicionar implements OnInit {
     private pessoaService: PessoaService,
     private exemplarService: ExemplarService,
     private livroService: LivroService,
+    private bibliotecaService: BibliotecaService,
     private router: Router
   ) { }
 
@@ -67,6 +73,10 @@ export class EmprestimoAdicionar implements OnInit {
 
     this.livroService.listar().subscribe({
       next: livros => this.livros = livros
+    });
+
+    this.bibliotecaService.listar().subscribe({
+      next: bibliotecas => this.bibliotecas = bibliotecas
     });
 
   }
@@ -89,30 +99,25 @@ export class EmprestimoAdicionar implements OnInit {
 
   }
 
+  exemplarNaoEncontrado = false;
+
   buscarExemplar(): void {
-
-    const exemplar = this.exemplares.find(
-      e => e.tombo === this.tombo
-    );
-
+    const exemplar = this.exemplares.find(e => e.tombo === this.tombo);
     if (exemplar) {
-
       this.emprestimo.exemplarId = exemplar.id!;
-
-      const livro = this.livros.find(
-        l => l.id === exemplar.livroId
-      );
-
+      const livro = this.livros.find(l => l.id === exemplar.livroId);
+      const biblioteca = this.bibliotecas.find(b => b.id === exemplar.bibliotecaId);
       this.tituloLivro = livro ? livro.titulo : '';
-
+      this.nomeBiblioteca = biblioteca ? biblioteca.nome : '';
+      this.exemplarNaoEncontrado = false;
+      this.erro = '';
     } else {
-
       this.emprestimo.exemplarId = 0;
       this.tituloLivro = '';
-
-      this.erro = 'Exemplar não encontrado.';
+      this.nomeBiblioteca = '';
+      this.exemplarNaoEncontrado = this.tombo.length > 0;
+      this.erro = '';
     }
-
   }
 
   salvar(): void {
