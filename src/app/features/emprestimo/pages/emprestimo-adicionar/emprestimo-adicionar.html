@@ -24,7 +24,7 @@
           (ngModelChange)="buscarExemplar()" />
       </div>
 
-      
+
       <div class="info-box" *ngIf="tituloLivro">
         <div class="info-item">
           <span class="label">Livro</span>
@@ -32,7 +32,7 @@
         </div>
       </div>
       <p class="erro" *ngIf="avisoExemplar">{{ avisoExemplar }}</p>
-      
+
 
     </div>
 
@@ -46,14 +46,14 @@
           (ngModelChange)="buscarLeitor()" />
       </div>
 
-     
+
       <div class="info-box" *ngIf="nomeLeitor">
         <div class="info-item">
           <span class="label">Leitor</span>
           <span class="value">{{ nomeLeitor }}</span>
         </div>
       </div>
-      
+
 
     </div>
 
@@ -99,7 +99,28 @@
 
   </form>
 
-  
+
+  @if (mostrarConfirmacao) {
+  <p>TESTE MODAL</p>
+  <div class="modal-overlay">
+    <div class="card modal">
+      <h3>Confirmar Empréstimo</h3>
+      <div class="detalhe">
+        <p><strong>Livro:</strong> {{ tituloLivro }}</p>
+        <p><strong>Tombo:</strong> {{ tombo }}</p>
+        <p><strong>Biblioteca:</strong> {{ nomeBiblioteca }}</p>
+        <p><strong>Leitor:</strong> {{ nomeLeitor }}</p>
+        <p><strong>Data de Retirada:</strong> {{ hoje }}</p>
+        <p><strong>Previsão de Devolução:</strong> {{ dataDevolucaoPrevista }}</p>
+      </div>
+      <div class="acoes">
+        <button class="btn secundario" (click)="mostrarConfirmacao = false">Voltar</button>
+        <button class="btn" (click)="confirmar()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+  }
+
   <div class="modal-overlay" *ngIf="mostrarConfirmacao">
     <div class="card modal">
       <h3>Confirmar Empréstimo</h3>
@@ -117,6 +138,6 @@
       </div>
     </div>
   </div>
-  
+
 
 </div>
