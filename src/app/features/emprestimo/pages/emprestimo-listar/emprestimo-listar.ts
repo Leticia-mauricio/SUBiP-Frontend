@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { Biblioteca } from '../../../biblioteca/models/biblioteca';
 
@@ -14,6 +16,7 @@ import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-emprestimo-listar',
+  imports: [CommonModule, FormsModule],
   templateUrl: './emprestimo-listar.html',
   styleUrls: ['./emprestimo-listar.css']
 })
