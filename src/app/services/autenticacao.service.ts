@@ -27,7 +27,7 @@ export class AutenticacaoService {
       id: 1,
       nome: 'Letícia Maurício',
       email: 'leticia@email.com',
-      perfil: Perfil.LEITOR
+      perfil: Perfil.ADMIN
     };
 
   }
