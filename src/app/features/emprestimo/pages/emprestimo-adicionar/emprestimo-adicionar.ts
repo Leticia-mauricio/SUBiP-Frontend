@@ -111,7 +111,13 @@ export class EmprestimoAdicionar implements OnInit {
       this.tituloLivro = livro ? livro.titulo : '';
       this.nomeBiblioteca = biblioteca ? biblioteca.nome : '';
       this.exemplarNaoEncontrado = false;
-      this.erro = '';
+
+      // aviso de exemplar não disponível
+      if (exemplar.situacao !== 'DISPONIVEL' && exemplar.situacao !== 'RESERVADO') {
+        this.erro = `Exemplar com situação ${exemplar.situacao} — pode não estar disponível para empréstimo.`;
+      } else {
+        this.erro = '';
+      }
     } else {
       this.emprestimo.exemplarId = 0;
       this.tituloLivro = '';
