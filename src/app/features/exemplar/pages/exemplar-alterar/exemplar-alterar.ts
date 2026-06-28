@@ -21,8 +21,8 @@ export class ExemplarAlterar implements OnInit {
   exemplar: Exemplar = {
     tombo: '',
     situacao: SituacaoExemplar.DISPONIVEL,
-    idLivro: 0,
-    idBiblioteca: 0
+    livroId: 0,
+    bibliotecaId: 0
   };
   livros: Livro[] = [];
   bibliotecas: Biblioteca[] = [];

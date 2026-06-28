@@ -43,7 +43,7 @@ export class ExemplarListar implements OnInit {
     private exemplarService: ExemplarService,
     private livroService: LivroService,
     private bibliotecaService: BibliotecaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     forkJoin({
@@ -55,16 +55,16 @@ export class ExemplarListar implements OnInit {
       this.bibliotecas = bibliotecas;
 
       this.lista = exemplares.map(e => {
-        const livro = livros.find(l => l.id === e.idLivro);
-        const biblioteca = bibliotecas.find(b => b.id === e.idBiblioteca);
+        const livro = livros.find(l => l.id === e.livroId);
+        const biblioteca = bibliotecas.find(b => b.id === e.bibliotecaId);
         return {
           id: e.id!,
           tombo: e.tombo,
           situacao: e.situacao,
           tituloLivro: livro?.titulo ?? 'Livro não encontrado',
           nomeBiblioteca: biblioteca?.nome ?? 'Biblioteca não encontrada',
-          idLivro: e.idLivro,
-          idBiblioteca: e.idBiblioteca
+          idLivro: e.livroId,
+          idBiblioteca: e.bibliotecaId
         };
       });
 

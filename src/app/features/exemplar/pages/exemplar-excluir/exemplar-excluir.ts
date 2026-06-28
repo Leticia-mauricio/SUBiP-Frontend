@@ -15,8 +15,9 @@ export class ExemplarExcluir implements OnInit {
   exemplar: Exemplar = {
     tombo: '',
     situacao: SituacaoExemplar.DISPONIVEL,
-    idLivro: 0,
-    idBiblioteca: 0
+    livroId: 0,
+    bibliotecaId: 0
+    
   };
   erro: string = '';
 
