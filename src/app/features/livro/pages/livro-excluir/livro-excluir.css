@@ -1,0 +1,183 @@
+.container {
+  padding: 20px;
+}
+
+/* CARD PADRÃO */
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+/* TÍTULO */
+h2 {
+  margin-bottom: 20px;
+}
+
+/* FILTROS */
+.filtros h3 {
+  margin-bottom: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.campo input,
+.campo select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* AÇÕES */
+.acoes {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  background: #1976d2;
+  color: white;
+  border-radius: 4px;
+}
+
+.btn.secundario {
+  background: #777;
+}
+
+.btn.exportar {
+  background: #2e7d32;
+}
+
+/* RESUMO */
+.resumo {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* TABELA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: #f5f5f5;
+}
+
+/* SITUAÇÃO */
+.EM_ANDAMENTO {
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.ATRASADO {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+.DEVOLVIDO {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.btn.novo {
+  background-color: #c0392b;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.btn.novo:hover {
+  background-color: #a93226;
+}
+
+/* ERRO */
+.erro {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* AVISO */
+.aviso {
+  background: #fff3e0;
+  border-left: 4px solid #f57c00;
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* DETALHE (usado no excluir) */
+.detalhe {
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.detalhe p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+/* BOTÃO PERIGO (excluir) */
+.btn.perigo {
+  background: #d32f2f;
+}
+
+.btn.perigo:hover {
+  background: #b71c1c;
+}
+
+/* BOTÃO AÇÃO NA TABELA */
+.btn-acao {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  text-decoration: none;
+  background: #1976d2;
+  color: white;
+  margin-right: 4px;
+}
+
+.btn-acao.perigo {
+  background: #d32f2f;
+}
