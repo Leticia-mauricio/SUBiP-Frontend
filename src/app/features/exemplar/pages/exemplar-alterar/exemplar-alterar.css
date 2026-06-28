@@ -115,7 +115,7 @@ th {
 }
 
 .btn.novo {
-  background-color: #c0392b;
+  background-color: #2e7d32;
   color: white;
   text-decoration: none;
   padding: 8px 16px;
@@ -124,7 +124,7 @@ th {
 }
 
 .btn.novo:hover {
-  background-color: #a93226;
+  background-color: #1b5e20;
 }
 
 /* ERRO */
