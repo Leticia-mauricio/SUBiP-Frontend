@@ -104,8 +104,7 @@
 
     </div>
 
-    @if (mostrarConfirmacao) {
-    <div class="modal-overlay">
+    <div class="modal-overlay" *ngIf="mostrarConfirmacao">
       <div class="card modal">
         <h3>Confirmar Empréstimo</h3>
         <div class="detalhe">
@@ -122,7 +121,6 @@
         </div>
       </div>
     </div>
-    }
 
   </form>
 
