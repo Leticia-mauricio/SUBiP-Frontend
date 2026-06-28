@@ -31,8 +31,15 @@
 
       <div class="campo">
         <label>Biblioteca</label>
-        <input [(ngModel)]="filtro.biblioteca" placeholder="Biblioteca">
+        <select [(ngModel)]="filtro.bibliotecaId">
+          <option [ngValue]="null">Todas</option>
+          <option *ngFor="let b of bibliotecas" [ngValue]="b.id">
+            {{ b.nome }}
+          </option>
+        </select>
       </div>
+
+
 
       <div class="campo">
         <label>Situação</label>
