@@ -116,9 +116,14 @@ export class EmprestimoAdicionar implements OnInit {
 
       if (exemplar.situacao === 'EMPRESTADO') {
         this.avisoExemplar = 'Este exemplar já está emprestado.';
+      } else if (exemplar.situacao === 'RESERVADO') {
+        this.avisoExemplar = 'Este exemplar está reservado para outro leitor.';
       } else if (exemplar.situacao === 'INDISPONIVEL') {
         this.avisoExemplar = 'Este exemplar está indisponível.';
+      } else {
+        this.avisoExemplar = '';
       }
+      
     } else {
       this.emprestimo.exemplarId = 0;
       this.tituloLivro = '';
