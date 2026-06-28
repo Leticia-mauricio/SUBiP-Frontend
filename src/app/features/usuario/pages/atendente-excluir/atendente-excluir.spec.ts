@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsuarioAlterar } from './usuario-alterar';
+import { AtendenteExcluir } from './atendente-excluir';
 
-describe('UsuarioAlterar', () => {
-  let component: UsuarioAlterar;
-  let fixture: ComponentFixture<UsuarioAlterar>;
+describe('AtendenteExcluir', () => {
+  let component: AtendenteExcluir;
+  let fixture: ComponentFixture<AtendenteExcluir>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsuarioAlterar],
+      imports: [AtendenteExcluir],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UsuarioAlterar);
+    fixture = TestBed.createComponent(AtendenteExcluir);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
