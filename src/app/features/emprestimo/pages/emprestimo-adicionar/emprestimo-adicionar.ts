@@ -133,12 +133,14 @@ export class EmprestimoAdicionar implements OnInit {
   mostrarConfirmacao = false;
 
   salvar(): void {
+    console.log('salvar chamado', this.mostrarConfirmacao);
     if (!this.emprestimo.exemplarId || !this.emprestimo.pessoaId) {
       this.erro = 'Preencha todos os campos antes de confirmar.';
       return;
     }
     this.erro = '';
-    this.mostrarConfirmacao = true; // abre o modal
+    this.mostrarConfirmacao = true;
+    console.log('mostrarConfirmacao', this.mostrarConfirmacao);
   }
 
   confirmar(): void {
