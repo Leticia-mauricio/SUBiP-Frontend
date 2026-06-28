@@ -1,16 +1,24 @@
-<h2>Excluir livro</h2>
+<div class="container">
+  <h2>Excluir Livro</h2>
 
-<p>Deseja realmente excluir o livro?</p>
+  <div class="card">
+    <p class="aviso">
+      ⚠️ Atenção: excluir este livro pode afetar exemplares e empréstimos vinculados a ele.
+    </p>
+    <p>Deseja realmente excluir o livro abaixo?</p>
+    <div class="detalhe">
+      <p><strong>Título:</strong> {{ livro.titulo }}</p>
+      <p><strong>ISBN:</strong> {{ livro.isbn }}</p>
+      <p><strong>Gênero:</strong> {{ livro.generoDescricao }}</p>
+    </div>
 
-<p>
-  <strong>{{ livro.titulo }}</strong>
-</p>
+    @if (erro) {
+      <p class="erro">{{ erro }}</p>
+    }
 
-@if (erro) {
-  <p style="color:red">{{ erro }}</p>
-}
-
-<button type="button" (click)="cancelar()" style="margin-right:8px">Cancelar</button>
-<button type="button" (click)="excluir()">
-  Excluir
-</button>
+    <div class="acoes">
+      <button class="btn secundario" (click)="cancelar()">Cancelar</button>
+      <button class="btn perigo" (click)="excluir()">Excluir</button>
+    </div>
+  </div>
+</div>

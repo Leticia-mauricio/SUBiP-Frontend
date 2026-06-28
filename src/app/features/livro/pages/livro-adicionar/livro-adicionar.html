@@ -1,18 +1,34 @@
-<h2>Adicionar livro</h2>
+<div class="container">
+  <h2>Novo Livro</h2>
 
-<input
-  type="text"
-  placeholder="Titulo do livro"
-  [(ngModel)]="livro.titulo"
-/>
+  <div class="card">
+    <div class="grid">
+      <div class="campo">
+        <label>Título</label>
+        <input type="text" [(ngModel)]="livro.titulo" placeholder="Título do livro">
+      </div>
+      <div class="campo">
+        <label>ISBN</label>
+        <input type="text" [(ngModel)]="livro.isbn" placeholder="Ex: 978-3-16-148410-0">
+      </div>
+      <div class="campo">
+        <label>Gênero</label>
+        <select [(ngModel)]="livro.generoId">
+          <option [ngValue]="0" disabled>Selecione um gênero</option>
+          <option *ngFor="let g of generos" [ngValue]="g.id">
+            {{ g.descricao }}
+          </option>
+        </select>
+      </div>
+    </div>
 
-@if (erro) {
-  <p style="color:red">{{ erro }}</p>
-}
+    @if (erro) {
+      <p class="erro">{{ erro }}</p>
+    }
 
-<button type="button" (click)="cancelar()" style="margin-right:8px">Cancelar</button>
-<button type="button" (click)="salvar()">
-  Salvar
-</button>
-
-<p>Nome digitado: {{ livro.titulo }}</p>
+    <div class="acoes">
+      <button class="btn secundario" (click)="cancelar()">Cancelar</button>
+      <button class="btn" (click)="salvar()">Salvar</button>
+    </div>
+  </div>
+</div>

@@ -1,55 +1,59 @@
-<h2>livros</h2>
+<div class="container">
+  <h2>Livros</h2>
 
-<a routerLink="/gerenciar/livros/adicionar">
-  Novo Livro
-</a>
+  <div class="card filtros">
+    <h3>Filtros de consulta</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Título</label>
+        <input [(ngModel)]="filtro.titulo" placeholder="Nome do livro">
+      </div>
+      <div class="campo">
+        <label>ISBN</label>
+        <input [(ngModel)]="filtro.isbn" placeholder="Ex: 978-3-16-148410-0">
+      </div>
+      <div class="campo">
+        <label>Gênero</label>
+        <select [(ngModel)]="filtro.generoId">
+          <option [ngValue]="null">Todos</option>
+          <option *ngFor="let g of generos" [ngValue]="g.id">
+            {{ g.descricao }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="acoes">
+      <button class="btn" (click)="pesquisar()">Pesquisar</button>
+      <button class="btn secundario" (click)="limpar()">Limpar</button>
+      <a routerLink="/gerenciar/livros/adicionar" class="btn">Novo Livro</a>
+    </div>
+  </div>
 
-<br><br>
+  <div class="resumo">
+    <p><strong>{{ listaFiltrada.length }}</strong> livros encontrados</p>
+  </div>
 
-<table border="1">
-
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-
-  <tbody>
-
-    <tr *ngFor="let livro of livros">
-
-      <td>{{ livro.id }}</td>
-
-      <td>{{ livro.titulo }}</td>
-
-      <td>
-
-        <a
-          [routerLink]="[
-            '/gerenciar/livros/alterar',
-            livro.id
-          ]"
-        >
-          Editar
-        </a>
-
-        |
-
-        <a
-          [routerLink]="[
-            '/gerenciar/livros/excluir',
-            livro.id
-          ]"
-        >
-          Excluir
-        </a>
-
-      </td>
-
-    </tr>
-
-  </tbody>
-
-</table>
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>ISBN</th>
+          <th>Gênero</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let livro of listaFiltrada">
+          <td>{{ livro.titulo }}</td>
+          <td>{{ livro.isbn }}</td>
+          <td>{{ livro.generoDescricao }}</td>
+          <td>
+            <a [routerLink]="['/gerenciar/livros/alterar', livro.id]" class="btn-acao">Editar</a>
+            <a [routerLink]="['/gerenciar/livros/excluir', livro.id]" class="btn-acao perigo">Excluir</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
