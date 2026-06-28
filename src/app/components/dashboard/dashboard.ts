@@ -80,8 +80,8 @@ export class Dashboard {
     },
 
     {
-      descricao: 'Gerenciar Leitores',
-      rota: '/gerenciar/pessoas',
+      descricao: 'Consultar Leitores',
+      rota: '/gerenciar/leitores',
       icone: '👥',
       perfis: ['ATENDENTE', 'ADMIN']
     },
