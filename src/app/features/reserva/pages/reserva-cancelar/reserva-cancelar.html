@@ -1,24 +1,20 @@
 <div class="container">
   <h2>Cancelar Reserva</h2>
-
   <div class="card">
     <p class="aviso">⚠️ Atenção: esta ação não pode ser desfeita.</p>
     <p>Deseja realmente cancelar a reserva abaixo?</p>
 
-    @if (reserva) {
-      <div class="detalhe">
-        <p><strong>Livro:</strong> {{ reserva.tituloLivro }}</p>
-        <p><strong>Tombo:</strong> {{ reserva.tombo }}</p>
-        <p><strong>Leitor:</strong> {{ reserva.pessoaNome }}</p>
-        <p><strong>Biblioteca:</strong> {{ reserva.biblioteca }}</p>
-        <p><strong>Data Registro:</strong> {{ reserva.dataRegistro }}</p>
-      </div>
-    }
+    <div class="detalhe">
+      <p><strong>Livro:</strong> {{ reserva?.tituloLivro }}</p>
+      <p><strong>Tombo:</strong> {{ reserva?.tombo }}</p>
+      <p><strong>Leitor:</strong> {{ reserva?.pessoaNome }}</p>
+      <p><strong>Biblioteca:</strong> {{ reserva?.biblioteca }}</p>
+      <p><strong>Data Registro:</strong> {{ reserva?.dataRegistro }}</p>
+    </div>
 
     @if (erro) {
       <p class="erro">{{ erro }}</p>
     }
-
     <div class="acoes">
       <button class="btn secundario" (click)="voltar()">Voltar</button>
       <button class="btn perigo" (click)="cancelar()">Cancelar Reserva</button>
