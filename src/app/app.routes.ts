@@ -19,7 +19,7 @@ import { ExemplarExcluir } from './features/exemplar/pages/exemplar-excluir/exem
 import { ExemplarAlterar } from './features/exemplar/pages/exemplar-alterar/exemplar-alterar';
 import { ReservaListar } from './features/reserva/pages/reserva-listar/reserva-listar';
 import { ReservaAdicionar } from './features/reserva/pages/reserva-adicionar/reserva-adicionar';
-import { ReservaCancelar} from './features/reserva/pages/reserva-cancelar/reserva-cancelar';
+import { ReservaCancelar } from './features/reserva/pages/reserva-cancelar/reserva-cancelar';
 import { EmprestimoListar } from './features/emprestimo/pages/emprestimo-listar/emprestimo-listar';
 import { EmprestimoAdicionar } from './features/emprestimo/pages/emprestimo-adicionar/emprestimo-adicionar';
 import { EmprestimoDevolver } from './features/emprestimo/pages/emprestimo-devolver/emprestimo-devolver';
@@ -31,6 +31,10 @@ import { PessoaAlterar } from './features/pessoa/pages/pessoa-alterar/pessoa-alt
 import { Home } from './features/home/home';
 import { AcervoConsulta } from './features/acervo/pages/acervo-consulta/acervo-consulta';
 import { MeusEmprestimos } from './features/emprestimo/pages/meus-emprestimos/meus-emprestimos';
+import { AtendenteListar } from './features/usuario/pages/atendente-listar/atendente-listar';
+import { AtendenteAdicionar } from './features/usuario/pages/atendente-adicionar/atendente-adicionar';
+import { AtendenteAlterar } from './features/usuario/pages/atendente-alterar/atendente-alterar';
+import { AtendenteExcluir } from './features/usuario/pages/atendente-excluir/atendente-excluir';
 
 
 export const routes: Routes = [
@@ -96,7 +100,7 @@ export const routes: Routes = [
                             { path: 'adicionar', component: EmprestimoAdicionar },
                             { path: 'devolver', component: EmprestimoDevolver },
                             { path: 'renovar', component: EmprestimoRenovar },
-                            { path: 'meus-emprestimos', component: MeusEmprestimos}
+                            { path: 'meus-emprestimos', component: MeusEmprestimos }
                         ]
                     },
                     {
@@ -105,6 +109,15 @@ export const routes: Routes = [
                             { path: '', component: ReservaListar },
                             { path: 'adicionar', component: ReservaAdicionar },
                             { path: 'excluir/:id', component: ReservaCancelar }
+                        ]
+                    },
+                    {
+                        path: 'atendentes',
+                        children: [
+                            { path: '', component: AtendenteListar },
+                            { path: 'adicionar', component: AtendenteAdicionar },
+                            { path: 'alterar/:id', component: AtendenteAlterar },
+                            { path: 'excluir/:id', component: AtendenteExcluir }
                         ]
                     }
                 ]
