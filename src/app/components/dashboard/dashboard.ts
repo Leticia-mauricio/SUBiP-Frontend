@@ -66,6 +66,20 @@ export class Dashboard {
     },
 
     {
+      descricao: 'Gerenciar Reservas',
+      rota: '/gerenciar/reservas',
+      icone: '📋',
+      perfis: ['ATENDENTE']
+    },
+    
+    {
+      descricao: 'Minhas Reservas',
+      rota: '/gerenciar/reservas/minhas-reservas',
+      icone: '📋',
+      perfis: ['LEITOR']
+    },
+
+    {
       descricao: 'Gerenciar Livros',
       rota: '/gerenciar/livros',
       icone: '📘',
