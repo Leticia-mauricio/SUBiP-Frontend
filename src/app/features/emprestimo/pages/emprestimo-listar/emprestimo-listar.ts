@@ -42,7 +42,7 @@ export class EmprestimoListar implements OnInit {
           pessoaCpf: pessoa?.cpf ?? ''
         };
       });
-      this.listaFiltrada = [...this.lista];
+      this.listaFiltrada = [...this.lista]; 
     });
   }
 
