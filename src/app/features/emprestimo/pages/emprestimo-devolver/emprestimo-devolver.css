@@ -136,3 +136,13 @@
 .btn-confirmar:hover {
     background: #0d47a1;
 }
+
+.modal-content {
+  background: white;
+  width: 400px;
+  max-width: 90%;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  z-index: 10000;
+}
