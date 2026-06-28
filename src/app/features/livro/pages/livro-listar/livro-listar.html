@@ -1,5 +1,9 @@
+
 <div class="container">
-  <h2>Livros</h2>
+  <div class="cabecalho">
+    <h2>Livros</h2>
+    <a routerLink="/gerenciar/livros/adicionar" class="btn novo">Novo Livro</a>
+  </div>
 
   <div class="card filtros">
     <h3>Filtros de consulta</h3>
@@ -25,7 +29,6 @@
     <div class="acoes">
       <button class="btn" (click)="pesquisar()">Pesquisar</button>
       <button class="btn secundario" (click)="limpar()">Limpar</button>
-      <a routerLink="/gerenciar/livros/adicionar" class="btn">Novo Livro</a>
     </div>
   </div>
 
