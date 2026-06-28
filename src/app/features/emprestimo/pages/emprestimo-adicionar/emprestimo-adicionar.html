@@ -24,17 +24,15 @@
           (ngModelChange)="buscarExemplar()" />
       </div>
 
-      @if (tituloLivro) {
-      <div class="info-box">
+      
+      <div class="info-box" *ngIf="tituloLivro">
         <div class="info-item">
           <span class="label">Livro</span>
           <span class="value">{{ tituloLivro }} — {{ nomeBiblioteca }}</span>
         </div>
       </div>
-      @if (erro) {
-      <p class="erro">{{ avisoExemplar }}</p>
-      }
-      }
+      <p class="erro" *ngIf="avisoExemplar">{{ avisoExemplar }}</p>
+      
 
     </div>
 
@@ -48,14 +46,14 @@
           (ngModelChange)="buscarLeitor()" />
       </div>
 
-      @if (nomeLeitor) {
-      <div class="info-box">
+     
+      <div class="info-box" *ngIf="nomeLeitor">
         <div class="info-item">
           <span class="label">Leitor</span>
           <span class="value">{{ nomeLeitor }}</span>
         </div>
       </div>
-      }
+      
 
     </div>
 
@@ -86,12 +84,7 @@
 
     </div>
 
-    @if (erro) {
-    <div class="erro-msg">
-      {{ erro }}
-    </div>
-    }
-
+    <div class="erro-msg" *ngIf="erro">{{ erro }}</div>
     <div class="actions">
 
       <button type="button" class="btn-cancelar" (click)="cancelar()">
@@ -106,8 +99,8 @@
 
   </form>
 
-  @if (mostrarConfirmacao) {
-  <div class="modal-overlay">
+  
+  <div class="modal-overlay" ngIf="mostrarConfirmacao">
     <div class="card modal">
       <h3>Confirmar Empréstimo</h3>
       <div class="detalhe">
@@ -124,6 +117,6 @@
       </div>
     </div>
   </div>
-  }
+  
 
 </div>
