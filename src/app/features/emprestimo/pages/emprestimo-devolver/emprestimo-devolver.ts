@@ -80,21 +80,18 @@ export class EmprestimoDevolver implements OnInit {
   }
 
   buscarExemplar(): void {
-
     this.emprestimoEncontrado = false;
+    this.erro = '';
 
-    const exemplar = this.exemplares.find(
-      e => e.tombo === this.tombo
-    );
+    const exemplar = this.exemplares.find(e => e.tombo === this.tombo);
 
     if (!exemplar) {
-      this.erro = 'Tombo não encontrado.';
+      this.erro = this.tombo.length > 0 ? 'Tombo não encontrado.' : '';
       return;
     }
 
     const emprestimo = this.emprestimos.find(
-      e =>
-        e.exemplarId === exemplar.id &&
+      e => e.exemplarId === exemplar.id &&
         e.situacao !== SituacaoEmprestimo.DEVOLVIDO
     );
 
@@ -103,39 +100,25 @@ export class EmprestimoDevolver implements OnInit {
       return;
     }
 
+    // limpa erro e preenche os dados
+    this.erro = '';
     this.emprestimoId = emprestimo.id!;
-
     const livro = this.livros.find(l => l.id === exemplar.livroId);
-
     const pessoa = this.pessoas.find(p => p.id === emprestimo.pessoaId);
-
-    const biblioteca = this.bibliotecas.find(
-      b => b.id === exemplar.bibliotecaId
-    );
-
+    const biblioteca = this.bibliotecas.find(b => b.id === exemplar.bibliotecaId);
     this.tituloLivro = livro?.titulo ?? '';
-
     this.nomeLeitor = pessoa?.nome ?? '';
-
     this.nomeBiblioteca = biblioteca?.nome ?? '';
-
     this.dataRetirada = emprestimo.dataRetirada;
-
     this.dataPrevista = emprestimo.dataDevolucaoPrevista;
 
     const hoje = new Date();
-
     const prevista = new Date(emprestimo.dataDevolucaoPrevista);
-
     this.diasAtraso = Math.floor(
-      (hoje.getTime() - prevista.getTime()) /
-      (1000 * 60 * 60 * 24)
+      (hoje.getTime() - prevista.getTime()) / (1000 * 60 * 60 * 24)
     );
-
     this.atrasado = this.diasAtraso > 0;
-
     this.emprestimoEncontrado = true;
-
   }
 
   mostrarConfirmacao = false;
