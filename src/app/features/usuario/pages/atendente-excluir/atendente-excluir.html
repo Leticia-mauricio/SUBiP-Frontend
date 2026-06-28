@@ -1,1 +1,23 @@
-<p>atendente-excluir works!</p>
+<div class="container">
+  <h2>Excluir Atendente</h2>
+
+  <div class="card">
+    <p class="aviso">
+      ⚠️ Atenção: ao excluir o atendente, o acesso dele ao sistema será removido.
+    </p>
+    <p>Deseja realmente excluir o atendente abaixo?</p>
+    <div class="detalhe">
+      <p><strong>Nome:</strong> {{ usuario.pessoaNome }}</p>
+      <p><strong>Login:</strong> {{ usuario.login }}</p>
+    </div>
+
+    @if (erro) {
+      <p class="erro">{{ erro }}</p>
+    }
+
+    <div class="acoes">
+      <button class="btn secundario" (click)="cancelar()">Cancelar</button>
+      <button class="btn perigo" (click)="excluir()">Excluir</button>
+    </div>
+  </div>
+</div>

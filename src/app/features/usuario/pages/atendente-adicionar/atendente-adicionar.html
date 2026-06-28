@@ -1,1 +1,40 @@
-<p>atendente-adicionar works!</p>
+<div class="container">
+  <div class="cabecalho">
+    <h2>Novo Atendente</h2>
+  </div>
+
+  <div class="card">
+    <h3>Dados pessoais</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Nome</label>
+        <input type="text" [(ngModel)]="pessoa.nome" placeholder="Nome completo">
+      </div>
+      <div class="campo">
+        <label>CPF</label>
+        <input type="text" [(ngModel)]="pessoa.cpf" placeholder="000.000.000-00">
+      </div>
+      <div class="campo">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="pessoa.email" placeholder="email@exemplo.com">
+      </div>
+    </div>
+
+    <h3>Dados de acesso</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Login</label>
+        <input type="text" [(ngModel)]="login" placeholder="Login de acesso">
+      </div>
+    </div>
+
+    @if (erro) {
+      <p class="erro">{{ erro }}</p>
+    }
+
+    <div class="acoes">
+      <button class="btn secundario" (click)="cancelar()">Cancelar</button>
+      <button class="btn" (click)="salvar()">Salvar</button>
+    </div>
+  </div>
+</div>

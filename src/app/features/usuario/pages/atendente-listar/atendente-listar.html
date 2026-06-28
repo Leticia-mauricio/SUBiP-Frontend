@@ -1,1 +1,50 @@
-<p>atendente-listar works!</p>
+<div class="container">
+  <div class="cabecalho">
+    <h2>Atendentes</h2>
+    <a routerLink="/gerenciar/atendentes/adicionar" class="btn novo">Novo Atendente</a>
+  </div>
+
+  <div class="card filtros">
+    <h3>Filtros de consulta</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Nome</label>
+        <input [(ngModel)]="filtro.nome" placeholder="Nome do atendente">
+      </div>
+      <div class="campo">
+        <label>Login</label>
+        <input [(ngModel)]="filtro.login" placeholder="Login">
+      </div>
+    </div>
+    <div class="acoes">
+      <button class="btn" (click)="pesquisar()">Pesquisar</button>
+      <button class="btn secundario" (click)="limpar()">Limpar</button>
+    </div>
+  </div>
+
+  <div class="resumo">
+    <p><strong>{{ listaFiltrada.length }}</strong> atendentes encontrados</p>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Login</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of listaFiltrada">
+          <td>{{ a.pessoaNome }}</td>
+          <td>{{ a.login }}</td>
+          <td>
+            <a [routerLink]="['/gerenciar/atendentes/alterar', a.id]" class="btn-acao">Editar</a>
+            <a [routerLink]="['/gerenciar/atendentes/excluir', a.id]" class="btn-acao perigo">Excluir</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
