@@ -10,7 +10,7 @@
       </div>
       <div class="campo">
         <label>Título do livro</label>
-        <input [(ngModel)]="filtro.titulo" placeholder="Nome do livro">
+        <input [(ngModel)]="filtro.tituloLivro" placeholder="Nome do livro">
       </div>
       <div class="campo">
         <label>Nome do leitor</label>
@@ -65,11 +65,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let e of listaFiltrada">
-          <td>{{ e.titulo }}</td>
+          <td>{{ e.tituloLivro }}</td>
           <td>{{ e.tombo }}</td>
           <td>{{ e.pessoaNome }}</td>
           <td>{{ e.pessoaCpf }}</td>
-          <td>{{ e.bibliotecaNome }}</td>
+          <td>{{ e.biblioteca }}</td>
           <td>{{ e.dataRetirada | date:'dd/MM/yyyy' }}</td>
           <td>{{ e.dataDevolucaoPrevista | date:'dd/MM/yyyy' }}</td>
           <td>
