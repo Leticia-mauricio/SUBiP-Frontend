@@ -1,57 +1,96 @@
-<div class="emprestimo-container">
-
-  <div class="page-header">
-    <span class="breadcrumb">Reservas > Nova Reserva</span>
-    <h1>Registrar Nova Reserva</h1>
-    <p>Preencha as informações abaixo para registrar a reserva.</p>
+<div class="container">
+  <div class="cabecalho">
+    <h2>Nova Reserva</h2>
   </div>
 
-  <form class="emprestimo-form">
+  <div class="card">
 
-    <div class="card">
-      <h3>📚 Identificação do Exemplar</h3>
-      <div class="form-group">
-        <label for="exemplarId">ID do Exemplar</label>
-        <input
-          id="exemplarId"
-          type="number"
-          placeholder="Ex.: 1"
-          [(ngModel)]="reserva.exemplarId"
-          name="exemplarId"
-          min="1"
-        />
-      </div>
-      <p class="observacao">O exemplar deve estar com situação <strong>EMPRESTADO</strong> para ser reservado.</p>
-    </div>
-
-    <div class="card">
-      <h3>👤 Identificação do Leitor</h3>
-      <div class="form-group">
-        <label for="pessoaId">ID do Leitor</label>
-        <input
-          id="pessoaId"
-          type="number"
-          placeholder="Ex.: 1"
-          [(ngModel)]="reserva.pessoaId"
-          name="pessoaId"
-          min="1"
-        />
+    <h3>📚 Buscar Exemplar</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Tombo</label>
+        <input type="text" [(ngModel)]="filtroTombo" placeholder="Ex: TMB0001">
       </div>
     </div>
+    <div class="acoes">
+      <button class="btn" (click)="buscarExemplar()">Buscar</button>
+    </div>
 
-    @if (erro) {
-      <div class="erro-msg">{{ erro }}</div>
+    <table *ngIf="exemplaresFiltrados.length > 0">
+      <thead>
+        <tr>
+          <th>Tombo</th>
+          <th>Situação</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of exemplaresFiltrados">
+          <td>{{ e.tombo }}</td>
+          <td>{{ e.situacao | titlecase }}</td>
+          <td>
+            <button class="btn" (click)="selecionarExemplar(e)">Selecionar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    @if (exemplarSelecionado) {
+      <div class="detalhe">
+        <p><strong>Exemplar selecionado:</strong> {{ exemplarSelecionado.tombo }}</p>
+      </div>
     }
 
-    <div class="actions">
-      <button type="button" class="btn-cancelar" (click)="cancelar()">
-        Cancelar
-      </button>
-      <button type="button" class="btn-confirmar" (click)="salvar()">
-        Confirmar Reserva
-      </button>
+    <hr style="margin: 20px 0">
+
+    <h3>👤 Buscar Leitor</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Nome</label>
+        <input type="text" [(ngModel)]="filtroPessoa.nome" placeholder="Nome do leitor">
+      </div>
+      <div class="campo">
+        <label>CPF</label>
+        <input type="text" [(ngModel)]="filtroPessoa.cpf" placeholder="000.000.000-00">
+      </div>
+    </div>
+    <div class="acoes">
+      <button class="btn" (click)="buscarPessoa()">Buscar</button>
     </div>
 
-  </form>
+    <table *ngIf="pessoasFiltradas.length > 0">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of pessoasFiltradas">
+          <td>{{ p.nome }}</td>
+          <td>{{ p.cpf }}</td>
+          <td>
+            <button class="btn" (click)="selecionarPessoa(p)">Selecionar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
+    @if (pessoaSelecionada) {
+      <div class="detalhe">
+        <p><strong>Leitor selecionado:</strong> {{ pessoaSelecionada.nome }} — {{ pessoaSelecionada.cpf }}</p>
+      </div>
+    }
+
+    @if (erro) {
+      <p class="erro">{{ erro }}</p>
+    }
+
+    <div class="acoes">
+      <button class="btn secundario" (click)="cancelar()">Cancelar</button>
+      <button class="btn" (click)="salvar()">Confirmar Reserva</button>
+    </div>
+
+  </div>
 </div>
