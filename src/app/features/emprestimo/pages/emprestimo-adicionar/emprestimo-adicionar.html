@@ -25,14 +25,17 @@
       </div>
 
 
-      <div class="info-box" *ngIf="tituloLivro">
+      @if (tituloLivro) {
+      <div class="info-box">
         <div class="info-item">
           <span class="label">Livro</span>
           <span class="value">{{ tituloLivro }} — {{ nomeBiblioteca }}</span>
         </div>
       </div>
-      <p class="erro" *ngIf="avisoExemplar">{{ avisoExemplar }}</p>
-
+      }
+      @if (avisoExemplar) {
+      <p class="erro">{{ avisoExemplar }}</p>
+      }
 
     </div>
 
