@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Leitores</h2>
+
+  <div class="card filtros">
+    <h3>Filtros de consulta</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Nome</label>
+        <input [(ngModel)]="filtro.nome" placeholder="Nome do leitor">
+      </div>
+      <div class="campo">
+        <label>Login</label>
+        <input [(ngModel)]="filtro.login" placeholder="Login">
+      </div>
+    </div>
+    <div class="acoes">
+      <button class="btn" (click)="pesquisar()">Pesquisar</button>
+      <button class="btn secundario" (click)="limpar()">Limpar</button>
+    </div>
+  </div>
+
+  <div class="resumo">
+    <p><strong>{{ listaFiltrada.length }}</strong> leitores encontrados</p>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Login</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of listaFiltrada">
+          <td>{{ l.pessoaNome }}</td>
+          <td>{{ l.login }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
