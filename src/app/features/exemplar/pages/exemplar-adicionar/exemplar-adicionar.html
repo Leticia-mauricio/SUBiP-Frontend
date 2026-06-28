@@ -5,11 +5,11 @@
     <div class="grid">
       <div class="campo">
         <label>Tombo</label>
-        <input type="text" [(ngModel)]="exemplar.tombo" placeholder="Ex: TMB0001">
+        <input type="text" [(ngModel)]="exemplar.tombo" placeholder="Ex: TOMBO-0001">
       </div>
       <div class="campo">
         <label>Livro</label>
-        <select [(ngModel)]="exemplar.idLivro">
+        <select [(ngModel)]="exemplar.livroId">
           <option [ngValue]="0" disabled>Selecione um livro</option>
           <option *ngFor="let l of livros" [ngValue]="l.id">{{ l.titulo }}</option>
         </select>
