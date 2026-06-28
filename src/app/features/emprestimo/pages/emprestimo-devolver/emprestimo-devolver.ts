@@ -138,15 +138,18 @@ export class EmprestimoDevolver implements OnInit {
 
   }
 
+  mostrarConfirmacao = false;
+
   devolver(): void {
+    this.mostrarConfirmacao = true;
+  }
+
+  confirmar(): void {
+    this.mostrarConfirmacao = false;
     this.erro = '';
     this.emprestimoService.devolver(this.emprestimoId, this.devolucao).subscribe({
-      next: () => {
-        this.router.navigate(['/gerenciar/emprestimos']);
-      },
-      error: (erro) => {
-        this.erro = erro?.error?.message || 'Erro ao registrar devolução.';
-      }
+      next: () => this.router.navigate(['/gerenciar/emprestimos']),
+      error: (erro) => this.erro = erro?.error?.message || 'Erro ao registrar devolução.'
     });
   }
 
