@@ -17,7 +17,7 @@ export class ExemplarExcluir implements OnInit {
     situacao: SituacaoExemplar.DISPONIVEL,
     livroId: 0,
     bibliotecaId: 0
-    
+
   };
   erro: string = '';
 
@@ -26,7 +26,7 @@ export class ExemplarExcluir implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -45,7 +45,11 @@ export class ExemplarExcluir implements OnInit {
     if (!id) return;
     this.exemplarService.excluir(id).subscribe({
       next: () => this.router.navigate(['/gerenciar/exemplares']),
-      error: (erro) => this.erro = erro?.error?.message || 'Erro ao excluir exemplar.'
+      //error: (erro) => this.erro = erro?.error?.message || 'Erro ao excluir exemplar.'
+      error: (erro) => {
+        console.log('erro:', erro.error);
+        this.erro = erro?.error?.message || 'Erro ao excluir.';
+      }
     });
   }
 
