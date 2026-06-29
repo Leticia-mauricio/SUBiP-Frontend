@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -21,8 +21,9 @@ export class LivroAdicionar implements OnInit {
   constructor(
     private livroService: LivroService,
     private generoService: GeneroService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     this.generoService.listar().subscribe(g => this.generos = g);
@@ -32,7 +33,10 @@ export class LivroAdicionar implements OnInit {
     this.erro = '';
     this.livroService.salvar(this.livro).subscribe({
       next: () => this.router.navigate(['/gerenciar/livros']),
-      error: (erro) => this.erro = erro?.error?.message || 'Erro ao salvar livro.'
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao salvar livro.';
+        this.cdr.detectChanges();
+      }
     });
   }
 
