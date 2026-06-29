@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Exemplar } from '../../models/exemplar';
@@ -31,7 +31,10 @@ export class ExemplarExcluir implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.exemplarService.buscarPorId(id).subscribe({
-      next: (exemplar) => this.exemplar = exemplar,
+      next: (exemplar) => {
+        this.exemplar = exemplar;
+        this.cdr.detectChanges();
+      },
       error: (erro) => console.error(erro)
     });
   }
