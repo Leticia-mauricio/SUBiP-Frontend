@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -23,10 +23,11 @@ export class AtendenteAdicionar implements OnInit {
   constructor(
     private pessoaService: PessoaService,
     private usuarioService: UsuarioService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   salvar(): void {
     this.erro = '';
@@ -41,7 +42,10 @@ export class AtendenteAdicionar implements OnInit {
       })
     ).subscribe({
       next: () => this.router.navigate(['/gerenciar/atendentes']),
-      error: (erro) => this.erro = erro?.error?.message || 'Erro ao cadastrar atendente.'
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao cadastrar atendente.';
+        this.cdr.detectChanges();
+      }
     });
   }
 
