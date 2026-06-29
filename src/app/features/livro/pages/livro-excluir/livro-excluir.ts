@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Livro } from '../../models/livro';
@@ -17,16 +17,20 @@ export class LivroExcluir implements OnInit {
   constructor(
     private livroService: LivroService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.livroService.buscarPorId(id).subscribe({
-      next: (livro) => this.livro = livro,
-      error: (erro) => console.error(erro)
-    });
-  }
+  const id = Number(this.route.snapshot.paramMap.get('id'));
+  this.livroService.buscarPorId(id).subscribe({
+    next: (livro) => {
+      this.livro = livro;
+      this.cdr.detectChanges();
+    },
+    error: (erro) => console.error(erro)
+  });
+}
 
   excluir(): void {
     this.erro = '';
