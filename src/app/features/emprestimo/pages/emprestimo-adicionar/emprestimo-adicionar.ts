@@ -100,8 +100,9 @@ export class EmprestimoAdicionar implements OnInit {
   }
 
   exemplarNaoEncontrado = false;
-
   avisoExemplar = '';
+  mostrarConfirmacao = false;
+  situacaoExemplar = '';
 
   buscarExemplar(): void {
     const exemplar = this.exemplares.find(e => e.tombo === this.tombo);
@@ -112,45 +113,41 @@ export class EmprestimoAdicionar implements OnInit {
       this.tituloLivro = livro ? livro.titulo : '';
       this.nomeBiblioteca = biblioteca ? biblioteca.nome : '';
       this.exemplarNaoEncontrado = false;
-      this.avisoExemplar = '';
+      this.situacaoExemplar = exemplar.situacao; // mover para aqui
 
       if (exemplar.situacao === 'EMPRESTADO') {
         this.avisoExemplar = 'Este exemplar já está emprestado.';
       } else if (exemplar.situacao === 'RESERVADO') {
-        this.avisoExemplar = 'Este exemplar está reservado para outro leitor.';
+        this.avisoExemplar = 'Este exemplar está reservado. O empréstimo só será permitido para o leitor que fez a reserva.';
       } else if (exemplar.situacao === 'INDISPONIVEL') {
         this.avisoExemplar = 'Este exemplar está indisponível.';
       } else {
         this.avisoExemplar = '';
       }
-      
     } else {
       this.emprestimo.exemplarId = 0;
       this.tituloLivro = '';
       this.nomeBiblioteca = '';
+      this.situacaoExemplar = '';
       this.avisoExemplar = this.tombo.length > 0 ? 'Exemplar não encontrado.' : '';
       this.exemplarNaoEncontrado = this.tombo.length > 0;
     }
   }
-
-  mostrarConfirmacao = false;
 
   salvar(): void {
     if (!this.emprestimo.exemplarId || !this.emprestimo.pessoaId) {
       this.erro = 'Preencha todos os campos antes de confirmar.';
       return;
     }
-    if (this.avisoExemplar) {
+    if (this.situacaoExemplar === 'EMPRESTADO' || this.situacaoExemplar === 'INDISPONIVEL') {
       this.erro = this.avisoExemplar;
-      return;
-    }
-    if (this.avisoLeitor) {
-      this.erro = this.avisoLeitor;
       return;
     }
     this.erro = '';
     this.mostrarConfirmacao = true;
   }
+
+
 
   confirmar(): void {
     this.mostrarConfirmacao = false;
