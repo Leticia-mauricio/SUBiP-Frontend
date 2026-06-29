@@ -40,18 +40,17 @@ export class ExemplarExcluir implements OnInit {
   }
 
   excluir(): void {
-    this.erro = '';
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (!id) return;
-    this.exemplarService.excluir(id).subscribe({
-      next: () => this.router.navigate(['/gerenciar/exemplares']),
-      //error: (erro) => this.erro = erro?.error?.message || 'Erro ao excluir exemplar.'
-      error: (erro) => {
-        console.log('erro:', erro.error);
-        this.erro = erro?.error?.message || 'Erro ao excluir.';
-      }
-    });
-  }
+  this.erro = '';
+  const id = Number(this.route.snapshot.paramMap.get('id'));
+  if (!id) return;
+  this.exemplarService.excluir(id).subscribe({
+    next: () => this.router.navigate(['/gerenciar/livros']),
+    error: (erro) => {
+      this.erro = erro?.error?.message || 'Erro ao excluir livro.';
+      this.cdr.detectChanges();
+    }
+  });
+}
 
   cancelar(): void {
     this.router.navigate(['/gerenciar/exemplares']);

@@ -19,18 +19,18 @@ export class LivroExcluir implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-  const id = Number(this.route.snapshot.paramMap.get('id'));
-  this.livroService.buscarPorId(id).subscribe({
-    next: (livro) => {
-      this.livro = livro;
-      this.cdr.detectChanges();
-    },
-    error: (erro) => console.error(erro)
-  });
-}
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.livroService.buscarPorId(id).subscribe({
+      next: (livro) => {
+        this.livro = livro;
+        this.cdr.detectChanges();
+      },
+      error: (erro) => console.error(erro)
+    });
+  }
 
   excluir(): void {
     this.erro = '';
@@ -38,7 +38,10 @@ export class LivroExcluir implements OnInit {
     if (!id) return;
     this.livroService.excluir(id).subscribe({
       next: () => this.router.navigate(['/gerenciar/livros']),
-      error: (erro) => this.erro = erro?.error?.message || 'Erro ao excluir livro. Não é possível excluir um livro vinculado a um exemplar.'
+      error: (erro) => {
+        this.erro = erro?.error?.message || 'Erro ao excluir livro.';
+        this.cdr.detectChanges();
+      }
     });
   }
 
