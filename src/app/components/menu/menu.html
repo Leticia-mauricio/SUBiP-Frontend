@@ -1,41 +1,31 @@
 <header class="header">
 
   <div class="logo-area">
-    <img
-      src="assets/logo-minas-gerais.png"
-      alt="Minas Gerais"
-      class="logo">
-
-    <h1>SUBIP</h1>
+    <img src="assets/logo-minas-gerais.png" alt="Minas Gerais" class="logo">
+    <h1 routerLink="/" style="cursor: pointer;">SUBIP</h1>
   </div>
 
   <div class="menu-actions">
 
     @if (autenticacao) {
 
-      <span class="usuario">
-        Olá, {{ primeiroNome() }}
-      </span>
+    <span class="usuario">
+      Olá, {{ primeiroNome() }}
+    </span>
 
-      <button
-        class="btn-login"
-        (click)="sair()">
-        Sair
-      </button>
+    <button class="btn-login" (click)="sair()">
+      Sair
+    </button>
 
     } @else {
 
-      <button
-        class="btn-login"
-        routerLink="/login">
-        Entrar
-      </button>
+    <button class="btn-login" routerLink="/login">
+      Entrar
+    </button>
 
     }
 
-    <a
-      routerLink="/ajuda"
-      class="menu-link">
+    <a routerLink="/ajuda" class="menu-link">
       Ajuda
     </a>
 
