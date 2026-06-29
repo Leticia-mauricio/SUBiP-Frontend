@@ -24,7 +24,8 @@ export class ExemplarExcluir implements OnInit {
   constructor(
     private exemplarService: ExemplarService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
