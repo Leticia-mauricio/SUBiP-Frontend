@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -23,8 +23,9 @@ export class LivroAlterar implements OnInit {
     private livroService: LivroService,
     private generoService: GeneroService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -35,6 +36,7 @@ export class LivroAlterar implements OnInit {
       next: ({ livro, generos }) => {
         this.livro = livro;
         this.generos = generos;
+        this.cdr.detectChanges(); // força atualização
       },
       error: (erro) => console.error(erro)
     });
