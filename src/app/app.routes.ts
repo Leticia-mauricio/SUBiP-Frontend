@@ -31,6 +31,7 @@ import { AtendenteAdicionar } from './features/usuario/pages/atendente-adicionar
 import { AtendenteAlterar } from './features/usuario/pages/atendente-alterar/atendente-alterar';
 import { AtendenteExcluir } from './features/usuario/pages/atendente-excluir/atendente-excluir';
 import { LeitorConsultar } from './features/usuario/pages/leitor-consultar/leitor-consultar';
+import { MinhasReservas } from './features/reserva/pages/minhas-reservas/minhas-reservas';
 
 
 export const routes: Routes = [
@@ -95,7 +96,8 @@ export const routes: Routes = [
                         children: [
                             { path: '', component: ReservaListar },
                             { path: 'adicionar', component: ReservaAdicionar },
-                            { path: 'excluir/:id', component: ReservaCancelar }
+                            { path: 'excluir/:id', component: ReservaCancelar },
+                            { path: 'minhas-reservas', component: MinhasReservas}
                         ]
                     },
                     {
