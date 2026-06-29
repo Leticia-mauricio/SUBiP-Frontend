@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Principal } from './components/principal/principal';
-import { Gerenciar } from './components/gerenciar/gerenciar';
 import { BibliotecaListar } from './features/biblioteca/pages/biblioteca-listar/biblioteca-listar';
 import { BibliotecaAdicionar } from './features/biblioteca/pages/biblioteca-adicionar/biblioteca-adicionar';
 import { BibliotecaExcluir } from './features/biblioteca/pages/biblioteca-excluir/biblioteca-excluir';
@@ -24,10 +23,6 @@ import { EmprestimoListar } from './features/emprestimo/pages/emprestimo-listar/
 import { EmprestimoAdicionar } from './features/emprestimo/pages/emprestimo-adicionar/emprestimo-adicionar';
 import { EmprestimoDevolver } from './features/emprestimo/pages/emprestimo-devolver/emprestimo-devolver';
 import { EmprestimoRenovar } from './features/emprestimo/pages/emprestimo-renovar/emprestimo-renovar';
-import { PessoaListar } from './features/pessoa/pages/pessoa-listar/pessoa-listar';
-import { PessoaAdicionar } from './features/pessoa/pages/pessoa-adicionar/pessoa-adicionar';
-import { PessoaExcluir } from './features/pessoa/pages/pessoa-excluir/pessoa-excluir';
-import { PessoaAlterar } from './features/pessoa/pages/pessoa-alterar/pessoa-alterar';
 import { Home } from './features/home/home';
 import { AcervoConsulta } from './features/acervo/pages/acervo-consulta/acervo-consulta';
 import { MeusEmprestimos } from './features/emprestimo/pages/meus-emprestimos/meus-emprestimos';
@@ -48,7 +43,7 @@ export const routes: Routes = [
             {
                 path: 'gerenciar',
                 children: [
-                    { path: '', component: Gerenciar },
+                    { path: '', redirectTo: '/', pathMatch: 'full' },
                     {
                         path: 'bibliotecas',
                         children: [
