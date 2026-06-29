@@ -158,8 +158,8 @@ export class EmprestimoAdicionar implements OnInit {
         this.router.navigate(['/gerenciar/emprestimos']);
       },
       error: (erro) => {
-        console.log('erro:', erro);
-        this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.'
+        console.log('erro.error:', erro.error);
+        this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.';
       }
     });
   }
