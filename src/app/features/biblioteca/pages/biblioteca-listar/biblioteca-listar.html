@@ -1,55 +1,44 @@
-<h2>Bibliotecas</h2>
+<div class="container">
+  <div class="cabecalho">
+    <h2>Bibliotecas</h2>
+    <a routerLink="/gerenciar/bibliotecas/adicionar" class="btn novo">Nova Biblioteca</a>
+  </div>
 
-<a routerLink="/gerenciar/bibliotecas/adicionar">
-  Nova Biblioteca
-</a>
+  <div class="card filtros">
+    <h3>Filtros de consulta</h3>
+    <div class="grid">
+      <div class="campo">
+        <label>Nome</label>
+        <input [(ngModel)]="filtro.nome" placeholder="Nome da biblioteca">
+      </div>
+    </div>
+    <div class="acoes">
+      <button class="btn" (click)="pesquisar()">Pesquisar</button>
+      <button class="btn secundario" (click)="limpar()">Limpar</button>
+    </div>
+  </div>
 
-<br><br>
+  <div class="resumo">
+    <p><strong>{{ listaFiltrada.length }}</strong> bibliotecas encontradas</p>
+  </div>
 
-<table border="1">
-
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-
-  <tbody>
-
-    <tr *ngFor="let biblioteca of bibliotecas">
-
-      <td>{{ biblioteca.id }}</td>
-
-      <td>{{ biblioteca.nome }}</td>
-
-      <td>
-
-        <a
-          [routerLink]="[
-            '/gerenciar/bibliotecas/alterar',
-            biblioteca.id
-          ]"
-        >
-          Editar
-        </a>
-
-        |
-
-        <a
-          [routerLink]="[
-            '/gerenciar/bibliotecas/excluir',
-            biblioteca.id
-          ]"
-        >
-          Excluir
-        </a>
-
-      </td>
-
-    </tr>
-
-  </tbody>
-
-</table>
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let b of listaFiltrada">
+          <td>{{ b.nome }}</td>
+          <td>
+            <a [routerLink]="['/gerenciar/bibliotecas/alterar', b.id]" class="btn-acao">Editar</a>
+            <a [routerLink]="['/gerenciar/bibliotecas/excluir', b.id]" class="btn-acao perigo">Excluir</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

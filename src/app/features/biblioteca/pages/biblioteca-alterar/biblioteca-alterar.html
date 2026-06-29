@@ -1,22 +1,18 @@
-<h2>Alterar Biblioteca</h2>
-
-<label for="nome">
-  Nome
-</label>
-
-<input
-  id="nome"
-  type="text"
-  [(ngModel)]="biblioteca.nome"
-/>
-
-<br><br>
-
-@if (erro) {
-  <p style="color:red">{{ erro }}</p>
-}
-
-<button type="button" (click)="cancelar()" style="margin-right:8px">Cancelar</button>
-<button type="button" (click)="salvar()">
-  Atualizar
-</button>
+<div class="container">
+  <h2>Alterar Biblioteca</h2>
+  <div class="card">
+    <div class="grid">
+      <div class="campo">
+        <label>Nome</label>
+        <input type="text" [(ngModel)]="biblioteca.nome" placeholder="Nome da biblioteca">
+      </div>
+    </div>
+    @if (erro) {
+      <p class="erro">{{ erro }}</p>
+    }
+    <div class="acoes">
+      <button class="btn secundario" (click)="cancelar()">Cancelar</button>
+      <button class="btn" (click)="salvar()">Atualizar</button>
+    </div>
+  </div>
+</div>
