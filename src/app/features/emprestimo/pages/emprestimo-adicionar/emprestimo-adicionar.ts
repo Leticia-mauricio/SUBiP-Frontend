@@ -150,19 +150,18 @@ export class EmprestimoAdicionar implements OnInit {
 
 
   confirmar(): void {
-    this.mostrarConfirmacao = false;
-    this.emprestimo.dataRetirada = new Date().toISOString().split('T')[0];
-    this.emprestimoService.salvar(this.emprestimo).subscribe({
-      next: (res) => {
-        console.log('sucesso:', res);
-        this.router.navigate(['/gerenciar/emprestimos']);
-      },
-      error: (erro) => {
-        console.log('erro.error:', erro.error);
-        this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.';
-      }
-    });
-  }
+  this.emprestimo.dataRetirada = new Date().toISOString().split('T')[0];
+  this.emprestimoService.salvar(this.emprestimo).subscribe({
+    next: () => {
+      this.mostrarConfirmacao = false;
+      this.router.navigate(['/gerenciar/emprestimos']);
+    },
+    error: (erro) => {
+      this.mostrarConfirmacao = false;
+      this.erro = erro?.error?.message || 'Erro ao registrar empréstimo.';
+    }
+  });
+}
 
   cancelar(): void {
     this.router.navigate(['/gerenciar/emprestimos']);
